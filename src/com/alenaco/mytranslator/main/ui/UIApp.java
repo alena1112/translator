@@ -1,10 +1,11 @@
 package com.alenaco.mytranslator.main.ui;
 
-import com.alenaco.mytranslator.main.controller.HttpResult;
-import com.alenaco.mytranslator.main.controller.HttpSender;
-import com.alenaco.mytranslator.main.controller.LanguageUtils;
+import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
+import com.alenaco.mytranslator.main.controller.translator.Translator;
+import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
+import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
 import com.alenaco.mytranslator.main.model.Cash;
-import com.alenaco.mytranslator.main.model.LanguageDirection;
+import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 
 public class UIApp extends Application {
     private Cash cash;
+    Translator translator;
 
     private Button translateBtn;
     private TextArea oneLangArea;
@@ -37,7 +39,7 @@ public class UIApp extends Application {
         createTranslationAreas(400, 150);
         createCashList(200, 300);
 
-        VBox vbox = new VBox(oneLangArea, anotherLangArea, translateBtn);
+        VBox vbox = new VBox(oneLangArea, translateBtn, anotherLangArea);
         HBox hBox = new HBox(vbox, cashView);
 
         StackPane root = new StackPane();
@@ -58,12 +60,13 @@ public class UIApp extends Application {
         translateBtn.setPrefSize(width, height);
         translateBtn.setOnAction(event -> {
             String clientInput = oneLangArea.getText();
-            LanguageDirection direction = LanguageUtils.getLanguageDirection(clientInput);
+            Language fromLang = LanguageUtils.getLanguage(clientInput);
+            Language toLang = fromLang == Language.RU ? Language.EN : Language.RU;
             Word word = cash.getTranslation(clientInput);
             if (word == null) {
-                HttpResult result = HttpSender.sendRequest(clientInput, direction);
+                TranslatorResult result = translator.getTranslation(clientInput, fromLang, toLang);
                 anotherLangArea.setText(result.getText());
-                cash.put(clientInput, result.getText(), direction);
+                cash.put(clientInput, result.getText(), fromLang);
                 previousWordsList.add(0, String.format(CASH_FORMAT, 1, clientInput, result.getText()));
             } else {
                 anotherLangArea.setText(word.getTranslationsStr());
@@ -99,6 +102,7 @@ public class UIApp extends Application {
     }
 
     private void prepareTranslator() {
+        translator = new YandexTranslator();
         cash = new Cash();
     }
 }

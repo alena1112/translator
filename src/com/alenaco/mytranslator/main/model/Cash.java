@@ -1,6 +1,8 @@
 package com.alenaco.mytranslator.main.model;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author kovalenko
@@ -48,7 +50,7 @@ public class Cash {
         return statistic.getStatistic(word, false);
     }
 
-    public void put(String en, String ru, LanguageDirection direction) {
+    public void put(String en, String ru, Language fromLang) {
         Word ruWord = findWord(ru);
         Word enWord = findWord(en);
         if (ruWord == null) {
@@ -59,11 +61,11 @@ public class Cash {
             enWord = new Word(en, Language.EN);
             words.add(enWord);
         }
-        switch (direction) {
-            case RU_EN:
+        switch (fromLang) {
+            case RU:
                 statistic.increaseStatisticCount(ruWord);
                 break;
-            case EN_RU:
+            case EN:
                 statistic.increaseStatisticCount(enWord);
                 break;
         }

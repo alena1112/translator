@@ -1,7 +1,7 @@
-package com.alenaco.mytranslator.main.controller;
+package com.alenaco.mytranslator.main.controller.utils;
 
 import com.alenaco.mytranslator.main.model.Language;
-import com.alenaco.mytranslator.main.model.LanguageDirection;
+import com.alenaco.mytranslator.main.controller.translator.yandex.LanguageDirection;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.regex.Matcher;

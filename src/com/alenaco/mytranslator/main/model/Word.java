@@ -1,8 +1,10 @@
 package com.alenaco.mytranslator.main.model;
 
-import com.alenaco.mytranslator.main.controller.LanguageUtils;
+import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -33,11 +35,12 @@ public class Word {
     }
 
     public String getTranslationsStr() {
-        StringBuilder sb = new StringBuilder();
-        for (Word word : translations) {
-            sb.append(word.getChars()).append(", ");
+        String[] params = new String[translations.size()];
+        Iterator<Word> iterator = translations.iterator();
+        for (int i = 0; i < params.length; i++) {
+            params[i] = iterator.next().getChars();
         }
-        return sb.length() != 0 ? sb.substring(0, sb.length() - 2) : sb.toString();
+        return StringUtils.join(params, ", ");
     }
 
     public String getChars() {

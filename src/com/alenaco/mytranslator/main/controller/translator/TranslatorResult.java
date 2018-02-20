@@ -1,10 +1,10 @@
-package com.alenaco.mytranslator.main.controller;
+package com.alenaco.mytranslator.main.controller.translator;
 
 /**
  * @author kovalenko
  * @version $Id$
  */
-public class HttpResult {
+public class TranslatorResult {
     private boolean result;
     private String text;
 
