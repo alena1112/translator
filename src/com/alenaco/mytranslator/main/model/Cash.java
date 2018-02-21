@@ -1,19 +1,29 @@
 package com.alenaco.mytranslator.main.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author kovalenko
  * @version $Id$
  */
+@XmlRootElement()
 public class Cash {
     private Statistic statistic = new Statistic();
+
     private Set<Word> words = new HashSet<>();//можно разделить листы на разные языки
 
+    @XmlElementWrapper()
+    @XmlElement(name = "word")
     public Set<Word> getWords() {
         return words;
+    }
+
+    public void setWords(Set<Word> words) {
+        this.words = words;
     }
 
     public Word getTranslation(String chars) {

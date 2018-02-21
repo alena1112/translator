@@ -1,9 +1,12 @@
 package com.alenaco.mytranslator.main.ui;
 
-import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
+import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
+import com.alenaco.mytranslator.main.controller.storages.Storage;
+import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
+import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
 import com.alenaco.mytranslator.main.model.Cash;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
@@ -18,10 +21,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.commons.collections.CollectionUtils;
 
 public class UIApp extends Application {
-    private Cash cash;
-    Translator translator;
+    private Storage<Cash> storage;
+    private Translator translator;
 
     private Button translateBtn;
     private TextArea oneLangArea;
@@ -62,17 +66,17 @@ public class UIApp extends Application {
             String clientInput = oneLangArea.getText();
             Language fromLang = LanguageUtils.getLanguage(clientInput);
             Language toLang = fromLang == Language.RU ? Language.EN : Language.RU;
-            Word word = cash.getTranslation(clientInput);
+            Word word = storage.getObject().getTranslation(clientInput);
             if (word == null) {
                 TranslatorResult result = translator.getTranslation(clientInput, fromLang, toLang);
                 anotherLangArea.setText(result.getText());
-                cash.put(clientInput, result.getText(), fromLang);
+                storage.getObject().put(clientInput, result.getText(), fromLang);
                 previousWordsList.add(0, String.format(CASH_FORMAT, 1, clientInput, result.getText()));
             } else {
                 anotherLangArea.setText(word.getTranslationsStr());
                 for (int i = 0; i < previousWordsList.size(); i++) {
                     String item = previousWordsList.get(i);
-                    int count = cash.getStatistic(word);
+                    int count = storage.getObject().getStatistic(word);
                     if (item.equals(String.format(CASH_FORMAT, count - 1, clientInput, word.getTranslationsStr()))) {
                         previousWordsList.remove(i);
                         previousWordsList.add(0, String.format(CASH_FORMAT, count,
@@ -98,11 +102,28 @@ public class UIApp extends Application {
         cashView = new ListView<>();
         cashView.setPrefSize(width, height);
         previousWordsList = FXCollections.observableArrayList();
+        if (CollectionUtils.isNotEmpty(storage.getObject().getWords())) {
+            for (Word word : storage.getObject().getWords()) {
+                previousWordsList.add(0, String.format(CASH_FORMAT, 0,
+                        word.getChars(), word.getTranslationsStr()));
+            }
+        }
         cashView.setItems(previousWordsList);
     }
 
     private void prepareTranslator() {
         translator = new YandexTranslator();
-        cash = new Cash();
+        try {
+            storage = new JSONStorage<>(new Cash());
+            storage.restoreObject();
+        } catch (StorageException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        storage.saveObject();
     }
 }
