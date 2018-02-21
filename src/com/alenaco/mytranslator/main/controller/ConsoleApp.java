@@ -17,12 +17,6 @@ import java.util.Scanner;
  */
 public class ConsoleApp {
 
-    //указание синонимичных слов
-    //приведение слов к инфинитиву???
-    //сохранение статистики (кэша) в xml, data base using NoSQL
-    //design patterns
-    //JUnit, documentation
-
     public static void main(String[] args) {
         Translator translator = new YandexTranslator();//create factory
         Cash cash = new Cash();
