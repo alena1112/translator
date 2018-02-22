@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cash>
-    <words/>
+    <words>
+        <word chars="буквально" language="RU" searchCount="0" id="c5bd8713-e882-4ffa-b65d-6590d9c977da">
+            <translationIds>
+                <id>2a6f13da-bc66-49fa-997b-acd118bb0d09</id>
+            </translationIds>
+        </word>
+        <word chars="literally" language="EN" lastSearchDate="2018-02-22T20:50:12.227+04:00" searchCount="1" id="2a6f13da-bc66-49fa-997b-acd118bb0d09">
+            <translationIds>
+                <id>c5bd8713-e882-4ffa-b65d-6590d9c977da</id>
+            </translationIds>
+        </word>
+        <word chars="определенно" language="RU" searchCount="0" id="f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed">
+            <translationIds>
+                <id>73e0e94f-e5a5-43f0-b7fc-76d4528f0bec</id>
+            </translationIds>
+        </word>
+        <word chars="definatly" language="EN" lastSearchDate="2018-02-22T20:50:23.363+04:00" searchCount="1" id="73e0e94f-e5a5-43f0-b7fc-76d4528f0bec">
+            <translationIds>
+                <id>f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed</id>
+            </translationIds>
+        </word>
+    </words>
 </cash>

@@ -6,20 +6,19 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author kovalenko
  * @version $Id$
  */
-@XmlRootElement()
+@XmlRootElement
 public class Word extends UUIDEntity {
     private String chars;
     private Language language;
-    private Set<Word> translations;
+    private Set<UUID> translations;
+    private int searchCount;
+    private Date lastSearchDate;
 
     public Word() {
         super();
@@ -32,7 +31,7 @@ public class Word extends UUIDEntity {
         this.language = language;
     }
 
-    @XmlAttribute()
+    @XmlAttribute
     public String getChars() {
         return chars;
     }
@@ -41,7 +40,7 @@ public class Word extends UUIDEntity {
         this.chars = chars;
     }
 
-    @XmlAttribute()
+    @XmlAttribute
     public Language getLanguage() {
         return language;
     }
@@ -50,36 +49,54 @@ public class Word extends UUIDEntity {
         this.language = language;
     }
 
-//    public Set<Word> getTranslations() {
-//        return translations;
-//    }
-
-    public void setTranslations(Set<Word> translations) {
-        this.translations = translations;
+    @XmlAttribute
+    public int getSearchCount() {
+        return searchCount;
     }
 
-    @XmlElementWrapper(name = "translations")
+    public void setSearchCount(int searchCount) {
+        this.searchCount = searchCount;
+    }
+
+    @XmlAttribute
+    public Date getLastSearchDate() {
+        return lastSearchDate;
+    }
+
+    public void setLastSearchDate(Date lastSearchDate) {
+        this.lastSearchDate = lastSearchDate;
+    }
+
+    @XmlElementWrapper(name = "translationIds")
     @XmlElement(name = "id")
-    public Set<UUID> getTranslationIds() {
-        Set<UUID> ids = new HashSet<>();
-        for (Word translation : translations) {
-            ids.add(translation.getId());
-        }
-        return ids;
+    public Set<UUID> getTranslations() {
+        return translations;
+    }
+
+    public void setTranslations(Set<UUID> translations) {
+        this.translations = translations;
     }
 
     public void addTranslation(Word translation) {
         if (translation.getLanguage() != this.language) {
-            this.translations.add(translation);
+            this.translations.add(translation.getId());
         }
     }
 
-    public String getTranslationsStr() {
+    public String getTranslationsStr(Cash cash) {
         String[] params = new String[translations.size()];
-        Iterator<Word> iterator = translations.iterator();
+        Iterator<UUID> iterator = translations.iterator();
         for (int i = 0; i < params.length; i++) {
-            params[i] = iterator.next().getChars();
+            Word word = cash.findWordById(iterator.next());
+            if (word != null) {
+                params[i] = word.getChars();
+            }
         }
         return StringUtils.join(params, ", ");
+    }
+
+    public void increaseSearchCount() {
+        this.searchCount += 1;
+        this.lastSearchDate = new Date();
     }
 }

@@ -40,7 +40,7 @@ public class ConsoleApp {
                         System.out.println("Word: " + result.getText());
                         cash.put(clientInput, result.getText(), fromLang);
                     } else {
-                        System.out.println("Word: " + word.getTranslationsStr());
+                        System.out.println("Word: " + word.getTranslationsStr(cash));
                     }
                 }
             }

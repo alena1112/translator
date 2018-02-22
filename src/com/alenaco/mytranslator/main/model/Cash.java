@@ -1,6 +1,8 @@
 package com.alenaco.mytranslator.main.model;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -10,13 +12,13 @@ import java.util.UUID;
  * @author kovalenko
  * @version $Id$
  */
-@XmlRootElement()
+
+//todo смешанная логика сущности и ее управления
+@XmlRootElement
 public class Cash {
-    private Statistic statistic = new Statistic();
+    private Set<Word> words = new HashSet<>();
 
-    private Set<Word> words = new HashSet<>();//можно разделить листы на разные языки
-
-    @XmlElementWrapper()
+    @XmlElementWrapper
     @XmlElement(name = "word")
     public Set<Word> getWords() {
         return words;
@@ -29,7 +31,7 @@ public class Cash {
     public Word getTranslation(String chars) {
         Word word = findWord(chars);
         if (word != null) {
-            statistic.increaseStatisticCount(word);
+            word.increaseSearchCount();
             return word;
         }
         return null;
@@ -47,8 +49,8 @@ public class Cash {
                     break;
             }
             sb.append(word.getChars()).append("\n");
-            sb.append("translation: ").append(word.getTranslationsStr()).append("\n");
-            sb.append("count: ").append(statistic.getStatistic(word, false)).append("\n");
+            sb.append("translation: ").append(word.getTranslationsStr(this)).append("\n");
+            sb.append("count: ").append(word.getSearchCount()).append("\n");
         }
         if (sb.length() != 0) {
             sb.deleteCharAt(sb.length() - 1);
@@ -56,11 +58,7 @@ public class Cash {
         return sb.toString();
     }
 
-    public int getStatistic(Word word) {
-        return statistic.getStatistic(word, false);
-    }
-
-    public void put(String en, String ru, Language fromLang) {
+    public Word put(String en, String ru, Language fromLang) {
         Word ruWord = findWord(ru);
         Word enWord = findWord(en);
         if (ruWord == null) {
@@ -73,14 +71,16 @@ public class Cash {
         }
         switch (fromLang) {
             case RU:
-                statistic.increaseStatisticCount(ruWord);
+                ruWord.increaseSearchCount();
                 break;
             case EN:
-                statistic.increaseStatisticCount(enWord);
+                enWord.increaseSearchCount();
                 break;
         }
         ruWord.addTranslation(enWord);
         enWord.addTranslation(ruWord);
+
+        return fromLang == Language.RU ? ruWord : enWord;
     }
 
     private Word findWord(String chars) {
@@ -88,5 +88,20 @@ public class Cash {
                 .filter(word -> word.getChars().equals(chars))
                 .findFirst();
         return foundWord.orElse(null);
+    }
+
+    public Word findWordById(UUID id) {
+        for (Word word : words) {
+            if (word.getId().equals(id)) {
+                return word;
+            }
+        }
+        return null;
+    }
+
+    public void removeWords(Word... selectedWords) {
+        for (Word word : selectedWords) {
+            words.remove(word);
+        }
     }
 }
