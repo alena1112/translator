@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cash>
-    <words>
-        <word chars="hello" language="EN" id="3858675c-a46b-403c-84c7-6b5b4a8ba5e2">
-            <translations>
-                <id>ff1df49f-3d8d-4e8c-bd75-e3a884c79f3c</id>
-            </translations>
-        </word>
-        <word chars="привет" language="RU" id="ff1df49f-3d8d-4e8c-bd75-e3a884c79f3c">
-            <translations>
-                <id>3858675c-a46b-403c-84c7-6b5b4a8ba5e2</id>
-            </translations>
-        </word>
-    </words>
+    <words/>
 </cash>
