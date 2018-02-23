@@ -4,6 +4,7 @@ import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
+import com.alenaco.mytranslator.main.controller.translator.TranslatorHelper;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
 import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
@@ -18,10 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ObjectUtils;
@@ -166,6 +164,8 @@ public class UIApp extends Application {
 
     private class ListViewHBox extends HBox {
         private Label label;
+        private Button testBtn;
+        private Button testBtn2;
         private Button addBtn;
         private Button editBtn;
         private Button deleteBtn;
@@ -183,6 +183,9 @@ public class UIApp extends Application {
             label.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(label, Priority.ALWAYS);
 
+            testBtn = new Button(word.getChars());
+            testBtn2 = new Button(word.getTranslationsStr(storage.getObject()));
+
             Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(ADD_ICON));
             addBtn = new Button("", new ImageView(addIcon));
 
@@ -199,7 +202,7 @@ public class UIApp extends Application {
                 previousWordsList.remove(this);
             });
 
-            this.getChildren().addAll(label, addBtn, editBtn, deleteBtn);
+            this.getChildren().addAll(testBtn, testBtn2, addBtn, editBtn, deleteBtn);
         }
 
         public Word getWord() {

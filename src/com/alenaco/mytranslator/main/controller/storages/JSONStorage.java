@@ -28,7 +28,7 @@ public class JSONStorage<T> implements Storage<T> {
     @Override
     public void saveObject() throws StorageException {
         try {
-            File file = new File(System.getProperty("user.dir") + "\\" + FILE_NAME);
+            File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(object, file);
@@ -40,7 +40,7 @@ public class JSONStorage<T> implements Storage<T> {
     @Override
     public void restoreObject() throws StorageException {
         try {
-            File file = new File(System.getProperty("user.dir") + "\\" + FILE_NAME);
+            File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             object = (T) jaxbUnmarshaller.unmarshal(file);
         } catch (JAXBException e) {
