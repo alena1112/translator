@@ -9,4 +9,6 @@ import com.alenaco.mytranslator.main.model.Language;
 public interface Translator {
 
     TranslatorResult getTranslation(String text, Language from, Language to);
+
+    String getInstanceName();
 }

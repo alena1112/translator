@@ -15,4 +15,13 @@ public class GoogleTranslator implements Translator {
     public TranslatorResult getTranslation(String text, Language from, Language to) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public String getInstanceName() {
+        Named annotation = getClass().getAnnotation(Named.class);
+        if (annotation != null) {
+            return annotation.name();
+        }
+        return null;
+    }
 }
