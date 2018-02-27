@@ -95,6 +95,17 @@ public class Word extends UUIDEntity {
         return StringUtils.join(params, ", ");
     }
 
+    public List<Word> getTranslations(Cash cash) {
+        List<Word> result = new ArrayList<>();
+        for (UUID id : translations) {
+            Word word = cash.findWordById(id);
+            if (word != null) {
+                result.add(word);
+            }
+        }
+        return result;
+    }
+
     public void increaseSearchCount() {
         this.searchCount += 1;
         this.lastSearchDate = new Date();

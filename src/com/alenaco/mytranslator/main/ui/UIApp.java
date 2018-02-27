@@ -4,7 +4,6 @@ import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
-import com.alenaco.mytranslator.main.controller.translator.TranslatorHelper;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
 import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
@@ -14,20 +13,22 @@ import com.alenaco.mytranslator.main.model.Word;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 //добавить логирование
 
@@ -163,28 +164,39 @@ public class UIApp extends Application {
     }
 
     private class ListViewHBox extends HBox {
-        private Label label;
-        private Button testBtn;
-        private Button testBtn2;
+        //todo search count info
+        private Button wordBtn;
+        private List<Button> translationBtns = new ArrayList<>();
         private Button addBtn;
         private Button editBtn;
         private Button deleteBtn;
 
         private Word word;
 
-        private static final String CASH_FORMAT = "(%s) %s -> %s";
-
         ListViewHBox(Word word) {
             super();
             this.word = word;
 
-            label = new Label();
-            updateLabelText();
-            label.setMaxWidth(Double.MAX_VALUE);
-            HBox.setHgrow(label, Priority.ALWAYS);
+            wordBtn = new Button(word.getChars());
+            wordBtn.setStyle("-fx-background-color: #87CEFA; -fx-border-color: #000000;");
+            this.getChildren().add(wordBtn);
 
-            testBtn = new Button(word.getChars());
-            testBtn2 = new Button(word.getTranslationsStr(storage.getObject()));
+            for (Word translation : word.getTranslations(storage.getObject())) {
+                Button btn = new Button(translation.getChars());
+                btn.setStyle("-fx-background-color: #ADFF2F; -fx-border-color: #000000;");
+                btn.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                        e -> {
+                            if (e.getButton() == MouseButton.PRIMARY) {
+                                //todo edit dialog
+                            } else if (e.getButton() == MouseButton.SECONDARY) {
+                                storage.getObject().removeWords(translation);
+                                translationBtns.remove(btn);
+                                this.getChildren().remove(btn);
+                            }
+                        });
+                translationBtns.add(btn);
+            }
+            this.getChildren().addAll(translationBtns);
 
             Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(ADD_ICON));
             addBtn = new Button("", new ImageView(addIcon));
@@ -202,7 +214,7 @@ public class UIApp extends Application {
                 previousWordsList.remove(this);
             });
 
-            this.getChildren().addAll(testBtn, testBtn2, addBtn, editBtn, deleteBtn);
+            this.getChildren().addAll(addBtn, editBtn, deleteBtn);
         }
 
         public Word getWord() {
@@ -210,8 +222,7 @@ public class UIApp extends Application {
         }
 
         public void updateLabelText() {
-            label.setText(String.format(CASH_FORMAT, word.getSearchCount(), word.getChars(),
-                    word.getTranslationsStr(storage.getObject())));
+
         }
     }
 }
