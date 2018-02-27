@@ -14,9 +14,15 @@
     </columnConstraints>
 
     <Label text="Translator Type" GridPane.columnIndex="0"
-           GridPane.rowIndex="1"/>
+           GridPane.rowIndex="0"/>
 
     <ComboBox fx:id="translatorTypesComboBox" prefHeight="10"
+              GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <Label text="Storage Type" GridPane.columnIndex="0"
+           GridPane.rowIndex="1"/>
+
+    <ComboBox fx:id="storageTypesComboBox" prefHeight="10"
               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
     <Button fx:id="submitButton" text="Submit"

@@ -1,14 +1,24 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
+import com.alenaco.mytranslator.main.model.Cash;
+
 /**
  * @author kovalenko
  * @version $Id$
  */
-public interface Storage<T> {
+public interface Storage {
 
-    void saveObject() throws StorageException;
+    void saveCash() throws StorageException;
 
-    void restoreObject() throws StorageException;
+    void restoreCash() throws StorageException;
 
-    T getObject();
+    Cash getCash();
+
+    String getInstanceName();
+
+//    void saveSession() throws StorageException;
+//
+//    void restoreSession() throws StorageException;
+//
+//    SessionContext getSession();
 }

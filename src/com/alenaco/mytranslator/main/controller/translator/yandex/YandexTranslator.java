@@ -1,5 +1,6 @@
 package com.alenaco.mytranslator.main.controller.translator.yandex;
 
+import com.alenaco.mytranslator.main.controller.AppSettings;
 import com.alenaco.mytranslator.main.controller.translator.Named;
 import com.alenaco.mytranslator.main.controller.utils.HttpResult;
 import com.alenaco.mytranslator.main.controller.utils.HttpSender;
@@ -17,7 +18,7 @@ import java.util.Map;
  * @version $Id$
  */
 @Named(name = "Yandex Translator")
-public class YandexTranslator implements Translator {
+public class YandexTranslator extends AppSettings implements Translator {
 
     private static final String API_KEY = "trnsl.1.1.20180214T084739Z.01acd7691b070343.fa3ff14d0d76fdd894bc5559f8e7bfec39c19c8b";
     private static final String BASE_URL = "https://translate.yandex.net/api/v1.5/tr.json/translate";

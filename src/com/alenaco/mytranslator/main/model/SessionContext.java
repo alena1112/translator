@@ -10,7 +10,8 @@ import com.alenaco.mytranslator.main.controller.translator.Translator;
 public class SessionContext {
     private Translator translator;
     private String translatorName;
-    private Storage<Cash> storage;
+    private Storage storage;
+    private String storageName;
 
     public Translator getTranslator() {
         return translator;
@@ -21,12 +22,13 @@ public class SessionContext {
         this.translatorName = translatorName;
     }
 
-    public Storage<Cash> getStorage() {
+    public Storage getStorage() {
         return storage;
     }
 
-    public void setStorage(Storage<Cash> storage) {
+    public void setStorage(Storage storage, String storageName) {
         this.storage = storage;
+        this.storageName = storageName;
     }
 
     public String getTranslatorName() {

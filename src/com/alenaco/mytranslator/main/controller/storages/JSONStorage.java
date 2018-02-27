@@ -1,5 +1,9 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
+import com.alenaco.mytranslator.main.controller.AppSettings;
+import com.alenaco.mytranslator.main.controller.translator.Named;
+import com.alenaco.mytranslator.main.model.Cash;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -10,45 +14,50 @@ import java.io.File;
  * @author kovalenko
  * @version $Id$
  */
-public class JSONStorage<T> implements Storage<T> {
+@Named(name = "JSON Storage")
+public class JSONStorage extends AppSettings implements Storage {
     private static final String FILE_NAME = "xmlStorage.xml";
 
     private JAXBContext jaxbContext;
-    private T object;
+    private Cash cash;
 
-    public JSONStorage(T object) throws StorageException {
-        this.object = object;
+    public JSONStorage() throws StorageException {
         try {
-            jaxbContext = JAXBContext.newInstance(object.getClass());
+            jaxbContext = JAXBContext.newInstance(Cash.class);
         } catch (JAXBException e) {
             throw new StorageException(e.getMessage());
         }
     }
 
     @Override
-    public void saveObject() throws StorageException {
+    public void saveCash() throws StorageException {
         try {
             File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            jaxbMarshaller.marshal(object, file);
+            jaxbMarshaller.marshal(cash, file);
         } catch (JAXBException e) {
             throw new StorageException(e.getMessage());
         }
     }
 
     @Override
-    public void restoreObject() throws StorageException {
+    public void restoreCash() throws StorageException {
         try {
             File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            object = (T) jaxbUnmarshaller.unmarshal(file);
+            cash = (Cash) jaxbUnmarshaller.unmarshal(file);
         } catch (JAXBException e) {
             throw new StorageException(e.getMessage());
         }
     }
 
-    public T getObject() {
-        return object;
+    public Cash getCash() {
+        return cash;
+    }
+
+    @Override
+    public String getInstanceName() {
+        return null;
     }
 }

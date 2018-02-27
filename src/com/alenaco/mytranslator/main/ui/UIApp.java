@@ -3,10 +3,10 @@ package com.alenaco.mytranslator.main.ui;
 import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
+import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
 import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
-import com.alenaco.mytranslator.main.model.Cash;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
@@ -57,7 +57,7 @@ public class UIApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         prepareTranslator();
 
-        createMenu(primaryStage, 300, 100);
+        createMenu(primaryStage, 300, 150);
         createTranslateButton(400, 10);
         createTranslationAreas(400, 150);
         createCashList(400, 300);
@@ -106,7 +106,7 @@ public class UIApp extends Application {
         cashView = new ListView<>();
         cashView.setPrefSize(width, height);
         previousWordsList = FXCollections.observableArrayList();
-        List<Word> words = new ArrayList<>(sessionContext.getStorage().getObject().getWords());
+        List<Word> words = new ArrayList<>(sessionContext.getStorage().getCash().getWords());
         if (CollectionUtils.isNotEmpty(words)) {
             words.sort((o1, o2) -> ObjectUtils.compare(o1.getLastSearchDate(), o2.getLastSearchDate()));//убрать
             for (Word word : words) {
@@ -151,12 +151,12 @@ public class UIApp extends Application {
 
     private void prepareTranslator() {
         sessionContext = new SessionContext();
-        YandexTranslator translator = new YandexTranslator();
+        Translator translator = new YandexTranslator();
         sessionContext.setTranslator(translator, translator.getInstanceName());
         try {
-            Storage<Cash> storage = new JSONStorage<>(new Cash());
-            storage.restoreObject();
-            sessionContext.setStorage(storage);
+            Storage storage = new JSONStorage();
+            storage.restoreCash();
+            sessionContext.setStorage(storage, storage.getInstanceName());
         } catch (StorageException e) {
             e.printStackTrace();
         }
@@ -165,7 +165,7 @@ public class UIApp extends Application {
     @Override
     public void stop() throws Exception {
         super.stop();
-        sessionContext.getStorage().saveObject();
+        sessionContext.getStorage().saveCash();
     }
 
     private void translateWord() {
@@ -173,7 +173,7 @@ public class UIApp extends Application {
         if (StringUtils.isNotBlank(clientInput)) {
             Language fromLang = LanguageUtils.getLanguage(clientInput);
             Language toLang = fromLang == Language.RU ? Language.EN : Language.RU;
-            Word word = sessionContext.getStorage().getObject().getTranslation(clientInput);
+            Word word = sessionContext.getStorage().getCash().getTranslation(clientInput);
             if (word == null) {
                 TranslatorResult result = null;
                 try {
@@ -183,10 +183,10 @@ public class UIApp extends Application {
                     return;
                 }
                 anotherLangArea.setText(result.getText());
-                Word newWord = sessionContext.getStorage().getObject().put(clientInput, result.getText(), fromLang);
+                Word newWord = sessionContext.getStorage().getCash().put(clientInput, result.getText(), fromLang);
                 previousWordsList.add(0, new ListViewHBox(newWord));
             } else {
-                anotherLangArea.setText(word.getTranslationsStr(sessionContext.getStorage().getObject()));
+                anotherLangArea.setText(word.getTranslationsStr(sessionContext.getStorage().getCash()));
                 ListViewHBox foundItem = null;
                 for (ListViewHBox item : previousWordsList) {
                     if (item.getWord().equals(word)) {
@@ -224,7 +224,7 @@ public class UIApp extends Application {
             wordBtn.setPrefWidth(150);
             this.getChildren().add(wordBtn);
 
-            for (Word translation : word.getTranslations(sessionContext.getStorage().getObject())) {
+            for (Word translation : word.getTranslations(sessionContext.getStorage().getCash())) {
                 Button btn = new Button(translation.getChars());
                 btn.setId("translationBtn");
                 btn.addEventHandler(MouseEvent.MOUSE_CLICKED,
@@ -232,7 +232,7 @@ public class UIApp extends Application {
                             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                                 //todo edit dialog
                             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                                sessionContext.getStorage().getObject().removeWords(translation);
+                                sessionContext.getStorage().getCash().removeWords(translation);
                                 translationBtns.remove(btn);
                                 this.getChildren().remove(btn);
                             }
@@ -252,9 +252,9 @@ public class UIApp extends Application {
             Image removeIcon = new Image(getClass().getClassLoader().getResourceAsStream(REMOVE_ICON));
             deleteBtn = new Button("", new ImageView(removeIcon));
             deleteBtn.setOnAction(event -> {
-                sessionContext.getStorage().getObject().removeWords(word);
+                sessionContext.getStorage().getCash().removeWords(word);
                 for (UUID id : word.getTranslations()) {
-                    sessionContext.getStorage().getObject().removeWords(sessionContext.getStorage().getObject().findWordById(id));
+                    sessionContext.getStorage().getCash().removeWords(sessionContext.getStorage().getCash().findWordById(id));
                 }
                 previousWordsList.remove(this);
             });
