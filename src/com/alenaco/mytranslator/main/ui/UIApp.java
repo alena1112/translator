@@ -15,6 +15,7 @@ import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -66,8 +67,12 @@ public class UIApp extends Application {
         createTranslationAreas(400, 150);
         createCashList(400, 300);
 
+        ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(REMOVE_ICON)));
+        Button button = new Button("", imageView);
+
+        VBox helpButtonsVBox = new VBox(imageView);
         VBox translationVBox = new VBox(menuBar, oneLangArea, translateBtn, anotherLangArea);
-        HBox cashHBox = new HBox(translationVBox, cashView);
+        HBox cashHBox = new HBox(helpButtonsVBox, translationVBox, cashView);
         VBox menuVBox = new VBox(menuBar, cashHBox);
 
         StackPane root = new StackPane();
@@ -213,9 +218,8 @@ public class UIApp extends Application {
         //todo search count info
         private Button wordBtn;
         private List<Button> translationBtns = new ArrayList<>();
-        private Button addBtn;
-        private Button editBtn;
-        private Button deleteBtn;
+        private ImageView addBtn;
+        private ImageView deleteBtn;
         private int mainWidth;
 
         private Word word;
@@ -248,30 +252,24 @@ public class UIApp extends Application {
             this.getChildren().addAll(translationBtns);
 
             Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(ADD_ICON));
-            addBtn = new Button("", new ImageView(addIcon));
-            addBtn.setPrefWidth(10);
-
-            Image editIcon = new Image(getClass().getClassLoader().getResourceAsStream(EDIT_ICON));
-            editBtn = new Button("", new ImageView(editIcon));
-            editBtn.setPrefWidth(10);
+            addBtn = new ImageView(addIcon);
 
             Image removeIcon = new Image(getClass().getClassLoader().getResourceAsStream(REMOVE_ICON));
-            deleteBtn = new Button("", new ImageView(removeIcon));
-            deleteBtn.setOnAction(event -> {
+            deleteBtn = new ImageView(removeIcon);
+            deleteBtn.setOnMouseClicked(event -> {
                 sessionContext.getStorage().getCash().removeWords(word);
                 for (UUID id : word.getTranslations()) {
                     sessionContext.getStorage().getCash().removeWords(sessionContext.getStorage().getCash().findWordById(id));
                 }
                 previousWordsList.remove(this);
             });
-            deleteBtn.setPrefWidth(10);
 
-            int buttonSize = (int) ((this.mainWidth - addBtn.getWidth() - editBtn.getWidth() - deleteBtn.getWidth() - wordBtn.getPrefWidth()) / translationBtns.size());
+            int buttonSize = (int) ((this.mainWidth - 30 - wordBtn.getPrefWidth()) / translationBtns.size());
             for (Button button : translationBtns) {
                 button.setPrefWidth(buttonSize);
             }
 
-            this.getChildren().addAll(addBtn, editBtn, deleteBtn);
+            this.getChildren().addAll(addBtn, deleteBtn);
         }
 
         public Word getWord() {
