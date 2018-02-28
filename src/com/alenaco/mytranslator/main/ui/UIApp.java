@@ -10,6 +10,7 @@ import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
+import com.alenaco.mytranslator.main.ui.edit_word.EditWordWindowController;
 import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -48,16 +49,19 @@ public class UIApp extends Application {
     private TextArea anotherLangArea;
     private ListView<ListViewHBox> cashView;
     private ObservableList<ListViewHBox> previousWordsList;
+    private Stage primaryStage;
 
     public static final String ADD_ICON = "resources/icons/add.png";
     public static final String REMOVE_ICON = "resources/icons/remove.png";
     public static final String EDIT_ICON = "resources/icons/edit.png";
+    public static final String MAIN_ICON = "resources/icons/main.jpg";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.primaryStage = primaryStage;
         prepareTranslator();
 
-        createMenu(primaryStage, 300, 150);
+        createMenu(300, 150);
         createTranslateButton(400, 10);
         createTranslationAreas(400, 150);
         createCashList(400, 300);
@@ -71,6 +75,7 @@ public class UIApp extends Application {
         root.getChildren().add(menuVBox);
 
         primaryStage.setTitle("My Translator");
+        primaryStage.getIcons().add(new Image(MAIN_ICON));
         primaryStage.setScene(new Scene(root, 800, 320));
         primaryStage.show();
     }
@@ -118,20 +123,20 @@ public class UIApp extends Application {
         cashView.setItems(previousWordsList);
     }
 
-    private void createMenu(Stage primaryStage, int width, int height) {
+    private void createMenu(int width, int height) {
         menuBar = new MenuBar();
         Menu menu = new Menu("Menu");
         Menu train = new Menu("Train");
         Menu tools = new Menu("Tools");
 
         MenuItem settings = new MenuItem("Settings");
-        initSettingsDialogWindow(settings, primaryStage, width, height);
+        initSettingsDialogWindow(settings, width, height);
         tools.getItems().add(settings);
 
         menuBar.getMenus().addAll(menu, train, tools);
     }
 
-    private void initSettingsDialogWindow(MenuItem settings, Stage parentStage, int width, int height) {
+    private void initSettingsDialogWindow(MenuItem settings, int width, int height) {
         settings.setOnAction(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("settings_window/settings-window.fxml"));
@@ -140,7 +145,8 @@ public class UIApp extends Application {
                 Stage dialog = new Stage();
                 dialog.setScene(new Scene(root, width, height));
                 dialog.setTitle("Settings");
-                dialog.initOwner(parentStage);
+                dialog.getIcons().add(new Image(MAIN_ICON));
+                dialog.initOwner(primaryStage);
                 dialog.initModality(Modality.APPLICATION_MODAL);
                 dialog.showAndWait();
             } catch (IOException e) {
@@ -230,7 +236,7 @@ public class UIApp extends Application {
                 btn.addEventHandler(MouseEvent.MOUSE_CLICKED,
                         mouseEvent -> {
                             if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                                //todo edit dialog
+                                showEditWordWindow(translation);
                             } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                                 sessionContext.getStorage().getCash().removeWords(translation);
                                 translationBtns.remove(btn);
@@ -286,5 +292,22 @@ public class UIApp extends Application {
         alert.setContentText(contentText);
 
         alert.showAndWait();
+    }
+
+    private void showEditWordWindow(Word word) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit_word/edit-word.fxml"));
+            loader.setController(new EditWordWindowController(sessionContext, word));
+            Parent root = loader.load();
+            Stage dialog = new Stage();
+            dialog.setScene(new Scene(root, 200, 100));
+            dialog.setTitle("Edit word");
+            dialog.getIcons().add(new Image(MAIN_ICON));
+            dialog.initOwner(primaryStage);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
