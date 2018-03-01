@@ -10,24 +10,20 @@ import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
-import com.alenaco.mytranslator.main.ui.edit_word.EditWordWindowController;
+import com.alenaco.mytranslator.main.ui.components.CashListViewHBox;
 import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.commons.collections.CollectionUtils;
@@ -37,25 +33,29 @@ import org.apache.commons.lang.StringUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 //добавить логирование
 
 public class UIApp extends Application {
     private SessionContext sessionContext;
 
+    private Stage primaryStage;
+
     private MenuBar menuBar;
+
     private Button translateBtn;
     private TextArea oneLangArea;
     private TextArea anotherLangArea;
-    private ListView<ListViewHBox> cashView;
-    private ObservableList<ListViewHBox> previousWordsList;
-    private Stage primaryStage;
+
+    private ListView<CashListViewHBox> cashView;
+    private ObservableList<CashListViewHBox> previousWordsList;
 
     public static final String ADD_ICON = "resources/icons/add.png";
     public static final String REMOVE_ICON = "resources/icons/remove.png";
     public static final String EDIT_ICON = "resources/icons/edit.png";
     public static final String MAIN_ICON = "resources/icons/main.jpg";
+    public static final String GARBAGE_ICON = "resources/icons/garbage.png";
+    public static final String SAVE_ICON = "resources/icons/save.png";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -67,12 +67,16 @@ public class UIApp extends Application {
         createTranslationAreas(400, 150);
         createCashList(400, 300);
 
-        ImageView imageView = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(REMOVE_ICON)));
-        Button button = new Button("", imageView);
+        FlowPane langAreasHelpPane = new FlowPane(Orientation.VERTICAL);
+        langAreasHelpPane.setVgap(2);
+        createCleanLanguageAreasBtn(0, langAreasHelpPane);
 
-        VBox helpButtonsVBox = new VBox(imageView);
+        FlowPane cashHelpPane = new FlowPane(Orientation.VERTICAL);
+        cashHelpPane.setVgap(2);
+        createSaveCashBtn(0, cashHelpPane);
+
         VBox translationVBox = new VBox(menuBar, oneLangArea, translateBtn, anotherLangArea);
-        HBox cashHBox = new HBox(helpButtonsVBox, translationVBox, cashView);
+        HBox cashHBox = new HBox(langAreasHelpPane, translationVBox, cashHelpPane, cashView);
         VBox menuVBox = new VBox(menuBar, cashHBox);
 
         StackPane root = new StackPane();
@@ -120,9 +124,7 @@ public class UIApp extends Application {
         if (CollectionUtils.isNotEmpty(words)) {
             words.sort((o1, o2) -> ObjectUtils.compare(o1.getLastSearchDate(), o2.getLastSearchDate()));//убрать
             for (Word word : words) {
-                if (word.getSearchCount() != 0) {
-                    previousWordsList.add(0, new ListViewHBox(word));
-                }
+                previousWordsList.add(0, new CashListViewHBox(word, sessionContext, primaryStage, previousWordsList));
             }
         }
         cashView.setItems(previousWordsList);
@@ -156,6 +158,7 @@ public class UIApp extends Application {
                 dialog.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
+                showErrorDialog("Application Error!", e.getMessage());
             }
         });
     }
@@ -170,13 +173,13 @@ public class UIApp extends Application {
             sessionContext.setStorage(storage, storage.getInstanceName());
         } catch (StorageException e) {
             e.printStackTrace();
+            showErrorDialog("Application Error!", e.getMessage());
         }
     }
 
     @Override
     public void stop() throws Exception {
         super.stop();
-        sessionContext.getStorage().saveCash();
     }
 
     private void translateWord() {
@@ -186,7 +189,7 @@ public class UIApp extends Application {
             Language toLang = fromLang == Language.RU ? Language.EN : Language.RU;
             Word word = sessionContext.getStorage().getCash().getTranslation(clientInput);
             if (word == null) {
-                TranslatorResult result = null;
+                TranslatorResult result;
                 try {
                     result = sessionContext.getTranslator().getTranslation(clientInput, fromLang, toLang);
                 } catch (UnsupportedOperationException exc) {
@@ -195,11 +198,11 @@ public class UIApp extends Application {
                 }
                 anotherLangArea.setText(result.getText());
                 Word newWord = sessionContext.getStorage().getCash().put(clientInput, result.getText(), fromLang);
-                previousWordsList.add(0, new ListViewHBox(newWord));
+                previousWordsList.add(0, new CashListViewHBox(newWord, sessionContext, primaryStage, previousWordsList));
             } else {
                 anotherLangArea.setText(word.getTranslationsStr(sessionContext.getStorage().getCash()));
-                ListViewHBox foundItem = null;
-                for (ListViewHBox item : previousWordsList) {
+                CashListViewHBox foundItem = null;
+                for (CashListViewHBox item : previousWordsList) {
                     if (item.getWord().equals(word)) {
                         item.updateLabelText();
                         foundItem = item;
@@ -214,74 +217,7 @@ public class UIApp extends Application {
         }
     }
 
-    private class ListViewHBox extends HBox {
-        //todo search count info
-        private Button wordBtn;
-        private List<Button> translationBtns = new ArrayList<>();
-        private ImageView addBtn;
-        private ImageView deleteBtn;
-        private int mainWidth;
-
-        private Word word;
-
-        ListViewHBox(Word word) {
-            super();
-            this.word = word;
-            this.mainWidth = (int) cashView.getPrefWidth();
-
-            wordBtn = new Button(word.getChars());
-            wordBtn.setId("wordBtn");
-            wordBtn.setPrefWidth(150);
-            this.getChildren().add(wordBtn);
-
-            for (Word translation : word.getTranslations(sessionContext.getStorage().getCash())) {
-                Button btn = new Button(translation.getChars());
-                btn.setId("translationBtn");
-                btn.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                        mouseEvent -> {
-                            if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-                                showEditWordWindow(translation);
-                            } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                                sessionContext.getStorage().getCash().removeWords(translation);
-                                translationBtns.remove(btn);
-                                this.getChildren().remove(btn);
-                            }
-                        });
-                translationBtns.add(btn);
-            }
-            this.getChildren().addAll(translationBtns);
-
-            Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(ADD_ICON));
-            addBtn = new ImageView(addIcon);
-
-            Image removeIcon = new Image(getClass().getClassLoader().getResourceAsStream(REMOVE_ICON));
-            deleteBtn = new ImageView(removeIcon);
-            deleteBtn.setOnMouseClicked(event -> {
-                sessionContext.getStorage().getCash().removeWords(word);
-                for (UUID id : word.getTranslations()) {
-                    sessionContext.getStorage().getCash().removeWords(sessionContext.getStorage().getCash().findWordById(id));
-                }
-                previousWordsList.remove(this);
-            });
-
-            int buttonSize = (int) ((this.mainWidth - 30 - wordBtn.getPrefWidth()) / translationBtns.size());
-            for (Button button : translationBtns) {
-                button.setPrefWidth(buttonSize);
-            }
-
-            this.getChildren().addAll(addBtn, deleteBtn);
-        }
-
-        public Word getWord() {
-            return word;
-        }
-
-        public void updateLabelText() {
-
-        }
-    }
-
-    private void showErrorDialog(String headerText, String contentText) {
+    public static void showErrorDialog(String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error Dialog");
         if (StringUtils.isNotBlank(headerText)) {
@@ -292,20 +228,27 @@ public class UIApp extends Application {
         alert.showAndWait();
     }
 
-    private void showEditWordWindow(Word word) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("edit_word/edit-word.fxml"));
-            loader.setController(new EditWordWindowController(sessionContext, word));
-            Parent root = loader.load();
-            Stage dialog = new Stage();
-            dialog.setScene(new Scene(root, 200, 100));
-            dialog.setTitle("Edit word");
-            dialog.getIcons().add(new Image(MAIN_ICON));
-            dialog.initOwner(primaryStage);
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void createSaveCashBtn(int position, FlowPane cashHelpPane) {
+        Image saveImg = new Image(getClass().getClassLoader().getResourceAsStream(SAVE_ICON));
+        Button saveBtn = new Button("", new ImageView(saveImg));
+        saveBtn.setOnAction(event -> {
+            try {
+                sessionContext.getStorage().saveCash();
+            } catch (Exception e) {
+                e.printStackTrace();
+                showErrorDialog("Application Error!", e.getMessage());
+            }
+        });
+        cashHelpPane.getChildren().add(position, saveBtn);
+    }
+
+    private void createCleanLanguageAreasBtn(int position, FlowPane langHelpPane) {
+        Image garbageImg = new Image(getClass().getClassLoader().getResourceAsStream(GARBAGE_ICON));
+        Button garbageBtn = new Button("", new ImageView(garbageImg));
+        garbageBtn.setOnAction(event -> {
+            oneLangArea.clear();
+            anotherLangArea.clear();
+        });
+        langHelpPane.getChildren().add(position, garbageBtn);
     }
 }

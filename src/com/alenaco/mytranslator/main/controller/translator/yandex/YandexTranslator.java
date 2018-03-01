@@ -67,13 +67,4 @@ public class YandexTranslator extends AppSettings implements Translator {
 
         return result;
     }
-
-    @Override
-    public String getInstanceName() {
-        Named annotation = getClass().getAnnotation(Named.class);
-        if (annotation != null) {
-            return annotation.name();
-        }
-        return null;
-    }
 }

@@ -55,9 +55,4 @@ public class JSONStorage extends AppSettings implements Storage {
     public Cash getCash() {
         return cash;
     }
-
-    @Override
-    public String getInstanceName() {
-        return null;
-    }
 }

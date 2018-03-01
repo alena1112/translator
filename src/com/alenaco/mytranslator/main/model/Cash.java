@@ -83,6 +83,21 @@ public class Cash {
         return fromLang == Language.RU ? ruWord : enWord;
     }
 
+    public void addNewTranslation(Word translationWord) {
+        Word word = findWord(translationWord.getChars());
+        if (word != null && word.getLanguage() == translationWord.getLanguage()) {
+            for (UUID id : translationWord.getTranslations()) {
+                word.getTranslations().add(id);
+                findWordById(id).getTranslations().add(word.getId());
+            }
+        } else {
+            words.add(translationWord);
+            for (UUID id : translationWord.getTranslations()) {
+                findWordById(id).getTranslations().add(translationWord.getId());
+            }
+        }
+    }
+
     private Word findWord(String chars) {
         Optional<Word> foundWord = words.stream()
                 .filter(word -> word.getChars().equals(chars))

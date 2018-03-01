@@ -7,11 +7,15 @@ import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -35,12 +39,20 @@ public class EditWordWindowController {
         if (word.getChars() != null) {
             translationTextField.setText(word.getChars());
         }
+        translationTextField.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                handleSubmitButtonAction(null);
+            }
+        });
     }
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
-        word.setChars(translationTextField.getText());
-        context.getStorage().getCash().getWords().add(word);
+        String text = translationTextField.getText();
+        if (StringUtils.isNotBlank(text)) {
+            word.setChars(text);
+            context.getStorage().getCash().addNewTranslation(word);
+        }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
     }

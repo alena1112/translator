@@ -11,16 +11,16 @@ import com.alenaco.mytranslator.main.model.Cash;
 public class HibernateStorage extends AppSettings implements Storage {
     @Override
     public void saveCash() throws StorageException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void restoreCash() throws StorageException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public Cash getCash() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 }
