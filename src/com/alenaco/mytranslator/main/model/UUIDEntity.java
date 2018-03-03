@@ -16,6 +16,10 @@ public class UUIDEntity {
         this.id = UUID.randomUUID();
     }
 
+    public UUIDEntity(UUID id) {
+        this.id = id;
+    }
+
     @XmlAttribute()
     public UUID getId() {
         return id;

@@ -1,12 +1,13 @@
 package com.alenaco.mytranslator.main.ui.components;
 
+import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.model.Language;
-import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
 import com.alenaco.mytranslator.main.ui.UIApp;
 import com.alenaco.mytranslator.main.ui.edit_word.EditWordWindowController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,77 +30,85 @@ import java.util.UUID;
  * @version $Id$
  */
 public class CashListViewHBox extends HBox {
-    private SessionContext sessionContext;
-    private Stage primaryStage;
-    private ObservableList<CashListViewHBox> previousWordsList;
+    private SessionManager sessionManager;
 
     //todo search count info
+    private Stage primaryStage;
     private WordButton wordBtn;
-    private ImageView addBtn;
-    private ImageView deleteBtn;
+    private FlowPane leftPane;
+    private FlowPane rightPane;
 
-    private Word word;
-
-    public CashListViewHBox(Word word, SessionContext sessionContext, Stage primaryStage, ObservableList<CashListViewHBox> previousWordsList) {
+    public CashListViewHBox(Word word, SessionManager sessionManager, Stage primaryStage) {
         super();
-        this.word = word;
-        this.sessionContext = sessionContext;
+        this.sessionManager = sessionManager;
         this.primaryStage = primaryStage;
-        this.previousWordsList = previousWordsList;
 
+        initHBox(word);
+    }
+
+    private void initHBox(Word word) {
         //todo переделать логику определения размеров компонентов
-        BorderPane root = new BorderPane();
-        FlowPane leftPane = new FlowPane();
+
+        leftPane = new FlowPane();
         leftPane.setHgap(2);
-        FlowPane rightPane = new FlowPane();
+        leftPane.setPrefWidth(304);
+
+        rightPane = new FlowPane();
         rightPane.setHgap(3);
         rightPane.setPrefWidth(35);
+
+        BorderPane root = new BorderPane();
         root.setLeft(leftPane);
         root.setRight(rightPane);
 
-        leftPane.setPrefWidth(304);
+        createBaseWordButton(word);
 
-        wordBtn = new WordButton(word, WordButton.WordButtonType.WORD);
-        leftPane.getChildren().add(wordBtn);
-
-        for (Word translation : word.getTranslations(sessionContext.getStorage().getCash())) {
-            createTranslationTextButton(translation, leftPane);
+        for (UUID id : word.getTranslations()) {
+            Word translation = sessionManager.getCashManager().findWordById(id);
+            if (translation != null) {
+                createTranslationTextButton(translation);
+            }
         }
 
-        Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(UIApp.ADD_ICON));
-        addBtn = new ImageView(addIcon);
-        rightPane.getChildren().add(addBtn);
-        addBtn.setOnMouseClicked(event -> {
-            Word newWord = new Word();
-            newWord.setLanguage(word.getLanguage() == Language.EN ? Language.RU : Language.EN);
-            newWord.getTranslations().add(word.getId());
-            showEditWordWindow(newWord);
-            createTranslationTextButton(newWord, leftPane);
-        });
-
-        Image removeIcon = new Image(getClass().getClassLoader().getResourceAsStream(UIApp.REMOVE_ICON));
-        deleteBtn = new ImageView(removeIcon);
-        rightPane.getChildren().add(deleteBtn);
-        deleteBtn.setOnMouseClicked(event -> {
-            sessionContext.getStorage().getCash().removeWords(word);
-            for (UUID id : word.getTranslations()) {
-                sessionContext.getStorage().getCash().removeWords(sessionContext.getStorage().getCash().findWordById(id));
-            }
-            previousWordsList.remove(this);
-        });
+        createAddButton();
+        createDeleteButton();
 
         this.getChildren().add(root);
-    }
-
-    public Word getWord() {
-        return word;
     }
 
     public void updateLabelText() {
 
     }
 
-    private void createTranslationTextButton(Word translation, FlowPane flowPane) {
+    public WordButton getWordButton(Word word) {
+        for (Node node : leftPane.getChildren()) {
+            if (node instanceof WordButton) {
+                WordButton btn = (WordButton) node;
+                if (btn.getWord().equals(word)) {
+                    return btn;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean isEmpty() {
+        return leftPane.getChildren().isEmpty();
+    }
+
+    private void createBaseWordButton(Word word) {
+        wordBtn = new WordButton(word, WordButton.WordButtonType.WORD);
+        wordBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                mouseEvent -> {
+                    if (mouseEvent.getButton() == MouseButton.PRIMARY) {
+                        showEditWordWindow(word);
+                        wordBtn.setText(word.getChars());
+                    }
+                });
+        leftPane.getChildren().add(wordBtn);
+    }
+
+    private void createTranslationTextButton(Word translation) {
         if (StringUtils.isNotBlank(translation.getChars())) {
             WordButton btn = new WordButton(translation, WordButton.WordButtonType.TRANSLATION);
             btn.addEventHandler(MouseEvent.MOUSE_CLICKED,
@@ -108,18 +117,40 @@ public class CashListViewHBox extends HBox {
                             showEditWordWindow(translation);
                             btn.setText(translation.getChars());
                         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                            sessionContext.getStorage().getCash().removeWords(translation);
-                            flowPane.getChildren().remove(btn);
+                            sessionManager.getCashManager().removeWordsWithTranslations(translation);
+                            leftPane.getChildren().remove(btn);
                         }
                     });
-            flowPane.getChildren().add(btn);
+            leftPane.getChildren().add(btn);
         }
+    }
+
+    private void createAddButton() {
+        Image addIcon = new Image(getClass().getClassLoader().getResourceAsStream(UIApp.ADD_ICON));
+        ImageView addBtn = new ImageView(addIcon);
+        rightPane.getChildren().add(addBtn);
+        addBtn.setOnMouseClicked(event -> {
+            Word newWord = new Word();
+            newWord.setLanguage(wordBtn.getWord().getLanguage() == Language.EN ? Language.RU : Language.EN);
+            newWord.getTranslations().add(wordBtn.getWord().getId());
+            showEditWordWindow(newWord);
+            createTranslationTextButton(newWord);
+        });
+    }
+
+    private void createDeleteButton() {
+        Image removeIcon = new Image(getClass().getClassLoader().getResourceAsStream(UIApp.REMOVE_ICON));
+        ImageView deleteBtn = new ImageView(removeIcon);
+        rightPane.getChildren().add(deleteBtn);
+        deleteBtn.setOnMouseClicked(event -> {
+            sessionManager.getCashManager().removeWordsWithTranslations(wordBtn.getWord());
+        });
     }
 
     private void showEditWordWindow(Word word) {
         try {
             FXMLLoader loader = new FXMLLoader(UIApp.class.getResource("edit_word/edit-word.fxml"));
-            loader.setController(new EditWordWindowController(sessionContext, word));
+            loader.setController(new EditWordWindowController(sessionManager, word));
             Parent root = loader.load();
             Stage dialog = new Stage();
             dialog.setScene(new Scene(root, 300, 100));

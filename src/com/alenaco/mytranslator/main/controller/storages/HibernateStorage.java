@@ -1,6 +1,5 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
-import com.alenaco.mytranslator.main.controller.AppSettings;
 import com.alenaco.mytranslator.main.controller.translator.Named;
 import com.alenaco.mytranslator.main.model.Cash;
 
@@ -8,19 +7,15 @@ import com.alenaco.mytranslator.main.model.Cash;
  * Created by alena on 28.02.18.
  */
 @Named(name = "Hibernate Storage")
-public class HibernateStorage extends AppSettings implements Storage {
+public class HibernateStorage implements Storage {
+
     @Override
-    public void saveCash() throws StorageException {
+    public void saveCash(Cash cash) throws StorageException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void restoreCash() throws StorageException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Cash getCash() {
+    public Cash restoreCash() throws StorageException {
         throw new UnsupportedOperationException();
     }
 }

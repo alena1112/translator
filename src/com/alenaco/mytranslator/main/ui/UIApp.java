@@ -1,16 +1,12 @@
 package com.alenaco.mytranslator.main.ui;
 
-import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
-import com.alenaco.mytranslator.main.controller.storages.Storage;
+import com.alenaco.mytranslator.main.controller.managers.CashManager;
+import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
-import com.alenaco.mytranslator.main.controller.translator.Translator;
-import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
-import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
-import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
-import com.alenaco.mytranslator.main.model.Language;
-import com.alenaco.mytranslator.main.model.SessionContext;
+import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Word;
 import com.alenaco.mytranslator.main.ui.components.CashListViewHBox;
+import com.alenaco.mytranslator.main.ui.components.WordButton;
 import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -31,13 +27,14 @@ import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 //добавить логирование
 
 public class UIApp extends Application {
-    private SessionContext sessionContext;
+    private SessionManager sessionManager;
 
     private Stage primaryStage;
 
@@ -120,11 +117,11 @@ public class UIApp extends Application {
         cashView = new ListView<>();
         cashView.setPrefSize(width, height);
         previousWordsList = FXCollections.observableArrayList();
-        List<Word> words = new ArrayList<>(sessionContext.getStorage().getCash().getWords());
+        List<Word> words = sessionManager.getCashManager().getWords();
         if (CollectionUtils.isNotEmpty(words)) {
             words.sort((o1, o2) -> ObjectUtils.compare(o1.getLastSearchDate(), o2.getLastSearchDate()));//убрать
             for (Word word : words) {
-                previousWordsList.add(0, new CashListViewHBox(word, sessionContext, primaryStage, previousWordsList));
+                previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
             }
         }
         cashView.setItems(previousWordsList);
@@ -147,7 +144,7 @@ public class UIApp extends Application {
         settings.setOnAction(event -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("settings_window/settings-window.fxml"));
-                loader.setController(new SettingsWindowController(sessionContext));
+                loader.setController(new SettingsWindowController(sessionManager));
                 Parent root = loader.load();
                 Stage dialog = new Stage();
                 dialog.setScene(new Scene(root, width, height));
@@ -163,15 +160,11 @@ public class UIApp extends Application {
         });
     }
 
-    private void prepareTranslator() {
-        sessionContext = new SessionContext();
-        Translator translator = new YandexTranslator();
-        sessionContext.setTranslator(translator, translator.getInstanceName());
+    private void prepareTranslator() throws IllegalAccessException {
         try {
-            Storage storage = new JSONStorage();
-            storage.restoreCash();
-            sessionContext.setStorage(storage, storage.getInstanceName());
-        } catch (StorageException e) {
+            sessionManager = new SessionManager();
+            sessionManager.getCashManager().addCashChangedListener(new UIAppCashChangedListener());
+        } catch (StorageException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
             showErrorDialog("Application Error!", e.getMessage());
         }
@@ -184,36 +177,12 @@ public class UIApp extends Application {
 
     private void translateWord() {
         String clientInput = oneLangArea.getText();
-        if (StringUtils.isNotBlank(clientInput)) {
-            Language fromLang = LanguageUtils.getLanguage(clientInput);
-            Language toLang = fromLang == Language.RU ? Language.EN : Language.RU;
-            Word word = sessionContext.getStorage().getCash().getTranslation(clientInput);
-            if (word == null) {
-                TranslatorResult result;
-                try {
-                    result = sessionContext.getTranslator().getTranslation(clientInput, fromLang, toLang);
-                } catch (UnsupportedOperationException exc) {
-                    showErrorDialog(null, String.format("%s is not supported!", sessionContext.getTranslatorName()));
-                    return;
-                }
-                anotherLangArea.setText(result.getText());
-                Word newWord = sessionContext.getStorage().getCash().put(clientInput, result.getText(), fromLang);
-                previousWordsList.add(0, new CashListViewHBox(newWord, sessionContext, primaryStage, previousWordsList));
-            } else {
-                anotherLangArea.setText(word.getTranslationsStr(sessionContext.getStorage().getCash()));
-                CashListViewHBox foundItem = null;
-                for (CashListViewHBox item : previousWordsList) {
-                    if (item.getWord().equals(word)) {
-                        item.updateLabelText();
-                        foundItem = item;
-                        break;
-                    }
-                }
-                if (foundItem != null) {
-                    previousWordsList.remove(foundItem);
-                    previousWordsList.add(0, foundItem);
-                }
-            }
+        try {
+            Word word = sessionManager.translateWord(clientInput);
+            anotherLangArea.setText(word.getChars());
+        } catch (UnsupportedOperationException exc) {
+            showErrorDialog(null, String.format("%s is not supported!",
+                    SettingsHelper.getClassName(sessionManager.getSessionContext().getTranslator())));
         }
     }
 
@@ -233,7 +202,7 @@ public class UIApp extends Application {
         Button saveBtn = new Button("", new ImageView(saveImg));
         saveBtn.setOnAction(event -> {
             try {
-                sessionContext.getStorage().saveCash();
+                sessionManager.saveCash();
             } catch (Exception e) {
                 e.printStackTrace();
                 showErrorDialog("Application Error!", e.getMessage());
@@ -250,5 +219,56 @@ public class UIApp extends Application {
             anotherLangArea.clear();
         });
         langHelpPane.getChildren().add(position, garbageBtn);
+    }
+
+    private class UIAppCashChangedListener implements CashManager.CashChangedListener {
+
+        @Override
+        public void cashChanged(Word word, CashManager.CashChangingType changingType) {
+            switch (changingType) {
+                case ADD:
+                    previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
+                    break;
+                case CHANGE_CHARS:
+                    List<WordButton> wordButtons = findWordButtons(word);
+                    for (WordButton wB : wordButtons) {
+                        wB.setText(word.getChars());
+                    }
+                    break;
+                case CHANGE_COUNT:
+                    break;
+                case ADD_TRANSLATION:
+
+                    break;
+                case DELETE:
+                    deleteWordButtons(word);
+                    break;
+            }
+        }
+    }
+
+    private List<WordButton> findWordButtons(Word word) {
+        List<WordButton> foundItems = new ArrayList<>();
+        for (CashListViewHBox item : previousWordsList) {
+            WordButton wB = item.getWordButton(word);
+            if (wB != null) {
+                foundItems.add(wB);
+            }
+        }
+        return foundItems;
+    }
+
+    private void deleteWordButtons(Word word) {
+        List<CashListViewHBox> toDelete = new ArrayList<>();
+        for (CashListViewHBox item : previousWordsList) {
+            WordButton wB = item.getWordButton(word);
+            if (wB != null) {
+                item.getChildren().remove(wB);
+            }
+            if (item.isEmpty()) {
+                toDelete.add(item);
+            }
+        }
+        previousWordsList.removeAll(toDelete);
     }
 }

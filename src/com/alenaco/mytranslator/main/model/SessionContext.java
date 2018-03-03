@@ -1,37 +1,31 @@
 package com.alenaco.mytranslator.main.model;
 
-import com.alenaco.mytranslator.main.controller.storages.Storage;
-import com.alenaco.mytranslator.main.controller.translator.Translator;
-
 /**
  * @author kovalenko
  * @version $Id$
  */
 public class SessionContext {
-    private Translator translator;
-    private String translatorName;
-    private Storage storage;
-    private String storageName;
+    private Class translator;
+    private Class storage;
 
-    public Translator getTranslator() {
+    public SessionContext(Class translator, Class storage) {
+        this.translator = translator;
+        this.storage = storage;
+    }
+
+    public Class getTranslator() {
         return translator;
     }
 
-    public void setTranslator(Translator translator, String translatorName) {
+    public void setTranslator(Class translator) {
         this.translator = translator;
-        this.translatorName = translatorName;
     }
 
-    public Storage getStorage() {
+    public Class getStorage() {
         return storage;
     }
 
-    public void setStorage(Storage storage, String storageName) {
+    public void setStorage(Class storage) {
         this.storage = storage;
-        this.storageName = storageName;
-    }
-
-    public String getTranslatorName() {
-        return translatorName;
     }
 }

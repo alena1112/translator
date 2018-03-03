@@ -1,6 +1,5 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
-import com.alenaco.mytranslator.main.controller.AppSettings;
 import com.alenaco.mytranslator.main.controller.translator.Named;
 import com.alenaco.mytranslator.main.model.Cash;
 
@@ -15,11 +14,10 @@ import java.io.File;
  * @version $Id$
  */
 @Named(name = "JSON Storage")
-public class JSONStorage extends AppSettings implements Storage {
-    private static final String FILE_NAME = "xmlStorage.xml";
-
+public class JSONStorage implements Storage {
     private JAXBContext jaxbContext;
-    private Cash cash;
+
+    private static final String FILE_NAME = "xmlStorage.xml";
 
     public JSONStorage() throws StorageException {
         try {
@@ -30,7 +28,7 @@ public class JSONStorage extends AppSettings implements Storage {
     }
 
     @Override
-    public void saveCash() throws StorageException {
+    public void saveCash(Cash cash) throws StorageException {
         try {
             File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -42,17 +40,13 @@ public class JSONStorage extends AppSettings implements Storage {
     }
 
     @Override
-    public void restoreCash() throws StorageException {
+    public Cash restoreCash() throws StorageException {
         try {
             File file = new File(System.getProperty("user.dir") + "/" + FILE_NAME);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            cash = (Cash) jaxbUnmarshaller.unmarshal(file);
+            return (Cash) jaxbUnmarshaller.unmarshal(file);
         } catch (JAXBException e) {
             throw new StorageException(e.getMessage());
         }
-    }
-
-    public Cash getCash() {
-        return cash;
     }
 }

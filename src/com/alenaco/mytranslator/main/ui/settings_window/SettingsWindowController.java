@@ -1,9 +1,9 @@
 package com.alenaco.mytranslator.main.ui.settings_window;
 
+import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
-import com.alenaco.mytranslator.main.model.SessionContext;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class SettingsWindowController {
@@ -24,10 +23,10 @@ public class SettingsWindowController {
 
     private Map<Class, String> translators;
     private Map<Class, String> storages;
-    private SessionContext context;
+    private SessionManager sessionManager;
 
-    public SettingsWindowController(SessionContext context) {
-        this.context = context;
+    public SettingsWindowController(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
     }
 
     @FXML
@@ -38,26 +37,21 @@ public class SettingsWindowController {
             ObservableList<String> items = translatorTypesComboBox.getItems();
             items.addAll(translators.values());
 
-            if (context.getTranslator() != null) {
-                for (Class clazz : translators.keySet()) {
-                    if (context.getTranslator().getClass().equals(clazz)) {
-                        translatorTypesComboBox.setValue(translators.get(clazz));
-                        break;
-                    }
+            for (Class clazz : translators.keySet()) {
+                if (sessionManager.getSessionContext().getTranslator().getClass().equals(clazz)) {
+                    translatorTypesComboBox.setValue(translators.get(clazz));
+                    break;
                 }
             }
-
             storages = SettingsHelper.getSettingsClasses(Storage.class);
 
             items = storageTypesComboBox.getItems();
             items.addAll(storages.values());
 
-            if (context.getStorage() != null) {
-                for (Class clazz : storages.keySet()) {
-                    if (context.getStorage().getClass().equals(clazz)) {
-                        storageTypesComboBox.setValue(storages.get(clazz));
-                        break;
-                    }
+            for (Class clazz : storages.keySet()) {
+                if (sessionManager.getSessionContext().getStorage().getClass().equals(clazz)) {
+                    storageTypesComboBox.setValue(storages.get(clazz));
+                    break;
                 }
             }
 
@@ -69,35 +63,31 @@ public class SettingsWindowController {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
-        try {
-            if (context.getTranslator() == null || !translators.get(context.getTranslator().getClass()).equals(translatorTypesComboBox.getValue())) {
-                Class translatorClass = null;
-                for (Map.Entry<Class, String> entry : translators.entrySet()) {
-                    if (entry.getValue().equals(translatorTypesComboBox.getValue())) {
-                        translatorClass = entry.getKey();
-                        break;
-                    }
-                }
-                if (translatorClass != null) {
-                    Translator translator = (Translator) SettingsHelper.getSettingsInstance(translatorClass);
-                    context.setTranslator(translator, translatorTypesComboBox.getValue());
+        if (sessionManager.getSessionContext().getTranslator() == null ||
+                !translators.get(sessionManager.getSessionContext().getTranslator()).equals(translatorTypesComboBox.getValue())) {
+            Class translatorClass = null;
+            for (Map.Entry<Class, String> entry : translators.entrySet()) {
+                if (entry.getValue().equals(translatorTypesComboBox.getValue())) {
+                    translatorClass = entry.getKey();
+                    break;
                 }
             }
-            if (context.getStorage() == null || !storages.get(context.getStorage().getClass()).equals(storageTypesComboBox.getValue())) {
-                Class storageClass = null;
-                for (Map.Entry<Class, String> entry : storages.entrySet()) {
-                    if (entry.getValue().equals(storageTypesComboBox.getValue())) {
-                        storageClass = entry.getKey();
-                        break;
-                    }
-                }
-                if (storageClass != null) {
-                    Storage storage = (Storage) SettingsHelper.getSettingsInstance(storageClass);
-                    context.setStorage(storage, storageTypesComboBox.getValue());
+            if (translatorClass != null) {
+                sessionManager.getSessionContext().setTranslator(translatorClass);
+            }
+        }
+        if (sessionManager.getSessionContext().getStorage() == null ||
+                !storages.get(sessionManager.getSessionContext().getStorage()).equals(storageTypesComboBox.getValue())) {
+            Class storageClass = null;
+            for (Map.Entry<Class, String> entry : storages.entrySet()) {
+                if (entry.getValue().equals(storageTypesComboBox.getValue())) {
+                    storageClass = entry.getKey();
+                    break;
                 }
             }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            e.printStackTrace();
+            if (storageClass != null) {
+                sessionManager.getSessionContext().setStorage(storageClass);
+            }
         }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();

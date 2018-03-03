@@ -1,5 +1,6 @@
 package com.alenaco.mytranslator.main.model;
 
+import com.alenaco.mytranslator.main.controller.managers.CashManager;
 import org.apache.commons.lang.StringUtils;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -29,6 +30,15 @@ public class Word extends UUIDEntity {
         this();
         this.chars = chars;
         this.language = language;
+    }
+
+    public Word(UUID id, String chars, Language language, Set<UUID> translations, int searchCount, Date lastSearchDate) {
+        super(id);
+        this.chars = chars;
+        this.language = language;
+        this.searchCount = searchCount;
+        this.lastSearchDate = lastSearchDate;
+        this.translations = new HashSet<>(translations);
     }
 
     @XmlAttribute
@@ -77,33 +87,12 @@ public class Word extends UUIDEntity {
         this.translations = translations;
     }
 
-    public void addTranslation(Word translation) {
-        if (translation.getLanguage() != this.language) {
+    public boolean addTranslation(Word translation) {
+        if (translation.getLanguage() != this.language && this.translations.contains(translation.getId())) {
             this.translations.add(translation.getId());
+            return true;
         }
-    }
-
-    public String getTranslationsStr(Cash cash) {
-        String[] params = new String[translations.size()];
-        Iterator<UUID> iterator = translations.iterator();
-        for (int i = 0; i < params.length; i++) {
-            Word word = cash.findWordById(iterator.next());
-            if (word != null) {
-                params[i] = word.getChars();
-            }
-        }
-        return StringUtils.join(params, ", ");
-    }
-
-    public List<Word> getTranslations(Cash cash) {
-        List<Word> result = new ArrayList<>();
-        for (UUID id : translations) {
-            Word word = cash.findWordById(id);
-            if (word != null) {
-                result.add(word);
-            }
-        }
-        return result;
+        return false;
     }
 
     public void increaseSearchCount() {

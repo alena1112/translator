@@ -1,6 +1,9 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
+import com.alenaco.mytranslator.main.controller.managers.CashManager;
 import com.alenaco.mytranslator.main.model.Cash;
+import com.alenaco.mytranslator.main.model.Language;
+import com.alenaco.mytranslator.main.model.Word;
 
 /**
  * @author kovalenko
@@ -8,13 +11,9 @@ import com.alenaco.mytranslator.main.model.Cash;
  */
 public interface Storage {
 
-    void saveCash() throws StorageException;
+    void saveCash(Cash cash) throws StorageException;
 
-    void restoreCash() throws StorageException;
-
-    Cash getCash();
-
-    String getInstanceName();
+    Cash restoreCash() throws StorageException;
 
 //    void saveSession() throws StorageException;
 //

@@ -1,36 +1,30 @@
 package com.alenaco.mytranslator.main.ui.edit_word;
 
-import com.alenaco.mytranslator.main.controller.storages.Storage;
-import com.alenaco.mytranslator.main.controller.translator.Translator;
-import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
+import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
 public class EditWordWindowController {
     @FXML
-    private TextField translationTextField;
+    private TextArea translationTextField;
     @FXML
     private Button submitButton;
+    @FXML
+    private GridPane gridPane;
 
-    private SessionContext context;
+    private SessionManager manager;
     private Word word;
 
-    public EditWordWindowController(SessionContext context, Word word) {
-        this.context = context;
+    public EditWordWindowController(SessionManager manager, Word word) {
+        this.manager = manager;
         this.word = word;
     }
 
@@ -51,7 +45,7 @@ public class EditWordWindowController {
         String text = translationTextField.getText();
         if (StringUtils.isNotBlank(text)) {
             word.setChars(text);
-            context.getStorage().getCash().addNewTranslation(word);
+            manager.getCashManager().addNewTranslation(word);
         }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();

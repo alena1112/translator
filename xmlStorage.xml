@@ -1,119 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <cash>
     <words>
-        <word chars="определенно" language="RU" searchCount="0" id="f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed">
+        <word chars="grab" language="EN" lastSearchDate="2018-02-23T02:20:16.293+04:00" searchCount="1" id="1a00fc28-67d5-4bb9-9c00-22c498025886">
             <translationIds>
-                <id>73e0e94f-e5a5-43f0-b7fc-76d4528f0bec</id>
+                <id>6d5c37d8-7aa8-4777-8007-bf096a970182</id>
+                <id>858f1c27-0f14-4d30-b1b9-0efde26baa4f</id>
             </translationIds>
         </word>
-        <word chars="странно" language="RU" searchCount="0" id="138d7ea4-6a99-4ab3-b195-515f8384a157">
+        <word chars="обвинять" language="RU" searchCount="0" id="d200433c-85a6-44eb-a49e-746072d71371">
             <translationIds>
-                <id>3b9349cf-0bf6-4724-beb0-203fd4421ea3</id>
+                <id>aa4f672c-9eb2-47f9-984c-a382697c7c04</id>
             </translationIds>
         </word>
-        <word chars="головокружение" language="RU" searchCount="0" id="057b38b2-7753-4c0b-94a4-eb6d326c79d3">
+        <word chars="treat" language="EN" lastSearchDate="2018-03-01T23:08:37.600+04:00" searchCount="1" id="12c3231a-e54f-4902-818c-933db5142077">
             <translationIds>
-                <id>f4173ac3-b04a-47c3-a9e6-05c5c24d87be</id>
+                <id>87e9bf4b-9881-4e68-92dd-1a470061e150</id>
             </translationIds>
         </word>
-        <word chars="effort" language="EN" lastSearchDate="2018-03-01T23:00:57.795+04:00" searchCount="1" id="7782d398-80c5-4d3e-bd98-f4dda86f7211">
+        <word chars="картон" language="RU" searchCount="0" id="232bf7d1-fbd1-4f6d-a861-e35603bc07e8">
             <translationIds>
-                <id>7a70ed22-26fa-4f01-90e6-f96d034cbef0</id>
+                <id>6c5120c3-9bd5-4ac4-b22f-33058a76656c</id>
             </translationIds>
         </word>
-        <word chars="brunch" language="EN" lastSearchDate="2018-03-01T22:49:31.499+04:00" searchCount="1" id="c617e4e3-6adf-40f6-b2df-18de8850b407">
+        <word chars="jumpsuit" language="EN" lastSearchDate="2018-03-01T22:51:46.773+04:00" searchCount="1" id="bf6fb871-9a24-42b1-b6ee-4002914bd792">
             <translationIds>
-                <id>b665317d-3bf1-48c1-8f0a-e54238fc0127</id>
-            </translationIds>
-        </word>
-        <word chars="вообще-то" language="RU" searchCount="0" id="29a42597-45f4-4eb7-83f0-dfc8b4b2168e">
-            <translationIds>
-                <id>710a44d5-de45-40b6-89bf-0f5d8d1d637c</id>
-            </translationIds>
-        </word>
-        <word chars="definatly" language="EN" lastSearchDate="2018-02-22T20:50:23.363+04:00" searchCount="1" id="73e0e94f-e5a5-43f0-b7fc-76d4528f0bec">
-            <translationIds>
-                <id>f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed</id>
-            </translationIds>
-        </word>
-        <word chars="recess" language="EN" lastSearchDate="2018-02-23T02:27:25.594+04:00" searchCount="1" id="59790901-40a0-408d-8649-28dd616d3bd0">
-            <translationIds>
-                <id>c63d8894-a655-4fef-b3a7-8a04c127edaa</id>
-            </translationIds>
-        </word>
-        <word chars="dowtown" language="EN" lastSearchDate="2018-02-23T02:12:14.306+04:00" searchCount="1" id="1f03041d-5a97-40a5-a0fc-01af0d5cfffe">
-            <translationIds>
-                <id>c60b58aa-ee64-499e-a1cb-14bacce55fcf</id>
-            </translationIds>
-        </word>
-        <word chars="head" language="EN" lastSearchDate="2018-02-23T02:22:55.838+04:00" searchCount="1" id="9b7e1190-ae18-4f2b-aa35-7e703f0ece2f">
-            <translationIds>
-                <id>85a62e17-93a0-453b-9ae5-bffd70dbc41f</id>
-            </translationIds>
-        </word>
-        <word chars="вдохновлять" language="RU" searchCount="0" id="99a849e8-d8c7-4e09-aa2d-1a662d07579d">
-            <translationIds>
-                <id>70b4b889-d2af-4e07-9200-6909a6bf2c83</id>
-            </translationIds>
-        </word>
-        <word chars="способность" language="RU" searchCount="0" id="4a5b5841-c24e-41c6-a9b1-b2c618f9f4e7">
-            <translationIds>
-                <id>6c5b05c1-7920-4b93-b346-9e356a9e478e</id>
-            </translationIds>
-        </word>
-        <word chars="на самом деле" language="RU" searchCount="0" id="4ca75cb8-c9ff-4c83-9d4c-6754bdb6b201">
-            <translationIds>
-                <id>710a44d5-de45-40b6-89bf-0f5d8d1d637c</id>
-            </translationIds>
-        </word>
-        <word chars="примирить" language="RU" searchCount="0" id="423a6cbe-3d5a-4d19-874a-64a1e7527988">
-            <translationIds>
-                <id>c0485a58-1113-4e2d-9933-93d1721f042f</id>
-            </translationIds>
-        </word>
-        <word chars="полдень" language="RU" searchCount="0" id="6d7d1a72-81fd-4c36-bc15-2b8eb354973d">
-            <translationIds>
-                <id>b99bfe95-0785-4b9b-b523-4f87b0ed8ad4</id>
-            </translationIds>
-        </word>
-        <word chars="насильник" language="RU" searchCount="0" id="87fa58ea-1eb3-4fe3-901c-0567a467ecad">
-            <translationIds>
-                <id>717b29fb-74e3-40be-bd45-03889b1c8e7b</id>
-            </translationIds>
-        </word>
-        <word chars="комбинезон" language="RU" searchCount="0" id="a0098f88-f778-4e8c-8f83-ae100334a94c">
-            <translationIds>
-                <id>bf6fb871-9a24-42b1-b6ee-4002914bd792</id>
-            </translationIds>
-        </word>
-        <word chars="estranged" language="EN" lastSearchDate="2018-03-01T23:30:56.780+04:00" searchCount="1" id="4ba6e697-273a-413d-a7d7-dfea8e1ff4c5">
-            <translationIds>
-                <id>12f7b112-ef9d-4881-a63a-1fe8a7bb0e66</id>
-            </translationIds>
-        </word>
-        <word chars="духовка" language="RU" searchCount="0" id="5c3e2fbe-54c3-4050-ad76-25d6de3f55a8">
-            <translationIds>
-                <id>d01f01ad-7a95-4a31-8604-a2ec069aab15</id>
-            </translationIds>
-        </word>
-        <word chars="совет" language="RU" searchCount="0" id="04ee5d18-91ff-474e-9ef6-d50466843742">
-            <translationIds>
-                <id>1ca3fc32-142a-4dec-8cae-d8cc73c56f1b</id>
-            </translationIds>
-        </word>
-        <word chars="bullet" language="EN" lastSearchDate="2018-03-01T23:31:50.759+04:00" searchCount="1" id="16b0d5da-6029-45f0-9714-6b66bf808324">
-            <translationIds>
-                <id>c7f67f81-6459-49c7-b227-ad76d8ea9eca</id>
-            </translationIds>
-        </word>
-        <word chars="capacity" language="EN" lastSearchDate="2018-03-01T22:54:00.229+04:00" searchCount="1" id="6c5b05c1-7920-4b93-b346-9e356a9e478e">
-            <translationIds>
-                <id>4a5b5841-c24e-41c6-a9b1-b2c618f9f4e7</id>
-            </translationIds>
-        </word>
-        <word chars="отчужденным" language="RU" searchCount="0" id="12f7b112-ef9d-4881-a63a-1fe8a7bb0e66">
-            <translationIds>
-                <id>4ba6e697-273a-413d-a7d7-dfea8e1ff4c5</id>
+                <id>a0098f88-f778-4e8c-8f83-ae100334a94c</id>
             </translationIds>
         </word>
         <word chars="обращаться" language="RU" searchCount="0" id="2ce85f6b-14f6-41cb-a588-a5ef6609f713">
@@ -121,49 +32,14 @@
                 <id>be1caaf7-8538-4cce-acda-348d4e01bfd3</id>
             </translationIds>
         </word>
-        <word chars="всплакнул" language="RU" searchCount="0" id="dceae46b-ee65-48d1-bf8a-8a766373bbc3">
+        <word chars="достичь" language="RU" searchCount="0" id="18c181c3-fdee-4bdb-996e-c8d5b34bd6fa">
             <translationIds>
-                <id>5797b319-387a-4e55-9c7f-d8f0c6be1be7</id>
+                <id>98f12c32-5955-4d0f-8c5e-1ab7b59d3f89</id>
             </translationIds>
         </word>
-        <word chars="rapist" language="EN" lastSearchDate="2018-03-01T23:33:14.489+04:00" searchCount="1" id="717b29fb-74e3-40be-bd45-03889b1c8e7b">
+        <word chars="attitude" language="EN" lastSearchDate="2018-03-01T23:01:16.084+04:00" searchCount="1" id="a157b107-5046-4fb9-9221-63b147baa0bc">
             <translationIds>
-                <id>87fa58ea-1eb3-4fe3-901c-0567a467ecad</id>
-            </translationIds>
-        </word>
-        <word chars="science fiction " language="EN" lastSearchDate="2018-03-01T17:15:23.666+04:00" searchCount="1" id="636148c2-2661-49ea-86b8-6be3da1d3e5a">
-            <translationIds>
-                <id>d9f42211-d0e6-47ef-8555-75a7dda37835</id>
-            </translationIds>
-        </word>
-        <word chars="усилия" language="RU" searchCount="0" id="7a70ed22-26fa-4f01-90e6-f96d034cbef0">
-            <translationIds>
-                <id>7782d398-80c5-4d3e-bd98-f4dda86f7211</id>
-            </translationIds>
-        </word>
-        <word chars="handle" language="EN" lastSearchDate="2018-02-23T02:35:51.638+04:00" searchCount="1" id="be1caaf7-8538-4cce-acda-348d4e01bfd3">
-            <translationIds>
-                <id>2ce85f6b-14f6-41cb-a588-a5ef6609f713</id>
-            </translationIds>
-        </word>
-        <word chars="проверять документы" language="RU" searchCount="0" id="00398248-fe94-4636-88a7-ff1cec9dc674">
-            <translationIds>
-                <id>3abfb215-e7cd-4c5b-a757-b163a6341ee3</id>
-            </translationIds>
-        </word>
-        <word chars="achieve" language="EN" lastSearchDate="2018-03-01T22:46:22.721+04:00" searchCount="1" id="4ba80d23-e644-49c4-b49b-7828f2d12047">
-            <translationIds>
-                <id>33b11676-3e59-4ea0-b9ea-8bdb4965f9ea</id>
-            </translationIds>
-        </word>
-        <word chars="oven" language="EN" lastSearchDate="2018-02-23T02:16:40.162+04:00" searchCount="1" id="d01f01ad-7a95-4a31-8604-a2ec069aab15">
-            <translationIds>
-                <id>5c3e2fbe-54c3-4050-ad76-25d6de3f55a8</id>
-            </translationIds>
-        </word>
-        <word chars="еле" language="RU" searchCount="0" id="2b86dab1-a22e-4fb5-b342-46ca95a2c7ac">
-            <translationIds>
-                <id>796a9ece-b7b4-46fe-884b-4a157b8d38e8</id>
+                <id>17913242-ad0d-4114-bf66-bef484f17343</id>
             </translationIds>
         </word>
         <word chars="tip" language="EN" lastSearchDate="2018-03-01T17:33:14.614+04:00" searchCount="1" id="1ca3fc32-142a-4dec-8cae-d8cc73c56f1b">
@@ -171,19 +47,74 @@
                 <id>04ee5d18-91ff-474e-9ef6-d50466843742</id>
             </translationIds>
         </word>
-        <word chars="захватить" language="RU" searchCount="0" id="6d5c37d8-7aa8-4777-8007-bf096a970182">
+        <word chars="схватить" language="RU" searchCount="0" id="858f1c27-0f14-4d30-b1b9-0efde26baa4f">
             <translationIds>
                 <id>1a00fc28-67d5-4bb9-9c00-22c498025886</id>
             </translationIds>
         </word>
-        <word chars="взгляд" language="RU" searchCount="0" id="193e60aa-6a52-4958-9ba5-3ed4253b0dbd">
+        <word chars="dowtown" language="EN" lastSearchDate="2018-02-23T02:12:14.306+04:00" searchCount="1" id="1f03041d-5a97-40a5-a0fc-01af0d5cfffe">
             <translationIds>
-                <id>448de07c-c7c3-4d88-8b04-9affca21627c</id>
+                <id>c60b58aa-ee64-499e-a1cb-14bacce55fcf</id>
             </translationIds>
         </word>
-        <word chars="gaze" language="EN" lastSearchDate="2018-03-01T23:10:30.179+04:00" searchCount="1" id="448de07c-c7c3-4d88-8b04-9affca21627c">
+        <word chars="отстранять" language="RU" searchCount="0" id="12f7b112-ef9d-4881-a63a-1fe8a7bb0e66">
             <translationIds>
-                <id>193e60aa-6a52-4958-9ba5-3ed4253b0dbd</id>
+                <id>4ba6e697-273a-413d-a7d7-dfea8e1ff4c5</id>
+            </translationIds>
+        </word>
+        <word chars="направляться" language="RU" searchCount="0" id="85a62e17-93a0-453b-9ae5-bffd70dbc41f">
+            <translationIds>
+                <id>9b7e1190-ae18-4f2b-aa35-7e703f0ece2f</id>
+            </translationIds>
+        </word>
+        <word chars="каблуки" language="RU" searchCount="0" id="520b11c5-ba0b-4075-bddc-e221a0892dce">
+            <translationIds>
+                <id>901407fe-e032-4c85-b47f-e770444f5a66</id>
+            </translationIds>
+        </word>
+        <word chars="в основном" language="RU" searchCount="0" id="8a2016d4-751a-4338-8b79-993f522d30ea">
+            <translationIds>
+                <id>b73f137f-f863-4124-8b3f-9d0a513750c0</id>
+            </translationIds>
+        </word>
+        <word chars="gross" language="EN" lastSearchDate="2018-02-23T02:26:17.428+04:00" searchCount="1" id="6e55822d-9924-490d-bb69-43037a4b2591">
+            <translationIds>
+                <id>1b7ed68b-c5e7-4ec9-9cde-e31ba2a94c2d</id>
+            </translationIds>
+        </word>
+        <word chars="проверять документы" language="RU" searchCount="0" id="00398248-fe94-4636-88a7-ff1cec9dc674">
+            <translationIds>
+                <id>3abfb215-e7cd-4c5b-a757-b163a6341ee3</id>
+            </translationIds>
+        </word>
+        <word chars="место" language="RU" searchCount="0" id="f4de232b-7f01-4f60-8ec1-00fd34b814af">
+            <translationIds>
+                <id>03a3668f-a4f6-4826-8acf-3251e45f931a</id>
+            </translationIds>
+        </word>
+        <word chars="обходиться" language="RU" searchCount="0" id="87e9bf4b-9881-4e68-92dd-1a470061e150">
+            <translationIds>
+                <id>12c3231a-e54f-4902-818c-933db5142077</id>
+            </translationIds>
+        </word>
+        <word chars="definatly" language="EN" lastSearchDate="2018-02-22T20:50:23.363+04:00" searchCount="1" id="73e0e94f-e5a5-43f0-b7fc-76d4528f0bec">
+            <translationIds>
+                <id>f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed</id>
+            </translationIds>
+        </word>
+        <word chars="estrange" language="EN" lastSearchDate="2018-03-01T23:30:56.780+04:00" searchCount="1" id="4ba6e697-273a-413d-a7d7-dfea8e1ff4c5">
+            <translationIds>
+                <id>12f7b112-ef9d-4881-a63a-1fe8a7bb0e66</id>
+            </translationIds>
+        </word>
+        <word chars="basicly" language="EN" lastSearchDate="2018-03-01T17:54:49.068+04:00" searchCount="1" id="b73f137f-f863-4124-8b3f-9d0a513750c0">
+            <translationIds>
+                <id>8a2016d4-751a-4338-8b79-993f522d30ea</id>
+            </translationIds>
+        </word>
+        <word chars="oven" language="EN" lastSearchDate="2018-02-23T02:16:40.162+04:00" searchCount="1" id="d01f01ad-7a95-4a31-8604-a2ec069aab15">
+            <translationIds>
+                <id>5c3e2fbe-54c3-4050-ad76-25d6de3f55a8</id>
             </translationIds>
         </word>
         <word chars="drive-thru" language="EN" lastSearchDate="2018-02-23T02:20:48.714+04:00" searchCount="1" id="2b2b8d04-b5ba-46b5-ac16-8f0b6aec3d85">
@@ -191,9 +122,125 @@
                 <id>3f15efa8-ece0-43c6-a406-e7933596e472</id>
             </translationIds>
         </word>
-        <word chars="barely" language="EN" lastSearchDate="2018-03-01T22:41:53.585+04:00" searchCount="1" id="796a9ece-b7b4-46fe-884b-4a157b8d38e8">
+        <word chars="come over" language="EN" lastSearchDate="2018-02-23T02:15:12.267+04:00" searchCount="1" id="20114330-fd0f-471b-a9c8-57446b8c604e">
             <translationIds>
-                <id>2b86dab1-a22e-4fb5-b342-46ca95a2c7ac</id>
+                <id>1a0f91b9-1cd5-4e0b-a05d-c86b9d1454f7</id>
+                <id>8995ec9d-0668-4a9e-8ae0-3d18ed29fda0</id>
+            </translationIds>
+        </word>
+        <word chars="полдень" language="RU" searchCount="0" id="6d7d1a72-81fd-4c36-bc15-2b8eb354973d">
+            <translationIds>
+                <id>b99bfe95-0785-4b9b-b523-4f87b0ed8ad4</id>
+            </translationIds>
+        </word>
+        <word chars="advocate" language="EN" lastSearchDate="2018-03-01T17:11:48.939+04:00" searchCount="1" id="750b8cab-97f9-42ad-8425-64c0a5d4d6a9">
+            <translationIds>
+                <id>f2613035-21f7-4f0d-a311-8fa6149f190a</id>
+            </translationIds>
+        </word>
+        <word chars="accuse" language="EN" lastSearchDate="2018-03-01T23:32:57.360+04:00" searchCount="1" id="aa4f672c-9eb2-47f9-984c-a382697c7c04">
+            <translationIds>
+                <id>d200433c-85a6-44eb-a49e-746072d71371</id>
+            </translationIds>
+        </word>
+        <word chars="на самом деле" language="RU" searchCount="0" id="4ca75cb8-c9ff-4c83-9d4c-6754bdb6b201">
+            <translationIds>
+                <id>710a44d5-de45-40b6-89bf-0f5d8d1d637c</id>
+            </translationIds>
+        </word>
+        <word chars="reconcile" language="EN" lastSearchDate="2018-03-01T23:30:41.317+04:00" searchCount="1" id="c0485a58-1113-4e2d-9933-93d1721f042f">
+            <translationIds>
+                <id>423a6cbe-3d5a-4d19-874a-64a1e7527988</id>
+            </translationIds>
+        </word>
+        <word chars="научная фантастика " language="RU" searchCount="0" id="d9f42211-d0e6-47ef-8555-75a7dda37835">
+            <translationIds>
+                <id>636148c2-2661-49ea-86b8-6be3da1d3e5a</id>
+            </translationIds>
+        </word>
+        <word chars="головокружение" language="RU" searchCount="0" id="057b38b2-7753-4c0b-94a4-eb6d326c79d3">
+            <translationIds>
+                <id>f4173ac3-b04a-47c3-a9e6-05c5c24d87be</id>
+            </translationIds>
+        </word>
+        <word chars="всплакнул" language="RU" searchCount="0" id="dceae46b-ee65-48d1-bf8a-8a766373bbc3">
+            <translationIds>
+                <id>5797b319-387a-4e55-9c7f-d8f0c6be1be7</id>
+            </translationIds>
+        </word>
+        <word chars="усилия" language="RU" searchCount="0" id="7a70ed22-26fa-4f01-90e6-f96d034cbef0">
+            <translationIds>
+                <id>7782d398-80c5-4d3e-bd98-f4dda86f7211</id>
+            </translationIds>
+        </word>
+        <word chars="bullet" language="EN" lastSearchDate="2018-03-01T23:31:50.759+04:00" searchCount="1" id="16b0d5da-6029-45f0-9714-6b66bf808324">
+            <translationIds>
+                <id>c7f67f81-6459-49c7-b227-ad76d8ea9eca</id>
+            </translationIds>
+        </word>
+        <word chars="noon" language="EN" lastSearchDate="2018-02-23T02:13:01.288+04:00" searchCount="1" id="b99bfe95-0785-4b9b-b523-4f87b0ed8ad4">
+            <translationIds>
+                <id>6d7d1a72-81fd-4c36-bc15-2b8eb354973d</id>
+            </translationIds>
+        </word>
+        <word chars="примирить" language="RU" searchCount="0" id="423a6cbe-3d5a-4d19-874a-64a1e7527988">
+            <translationIds>
+                <id>c0485a58-1113-4e2d-9933-93d1721f042f</id>
+            </translationIds>
+        </word>
+        <word chars="взгляд" language="RU" searchCount="0" id="193e60aa-6a52-4958-9ba5-3ed4253b0dbd">
+            <translationIds>
+                <id>448de07c-c7c3-4d88-8b04-9affca21627c</id>
+            </translationIds>
+        </word>
+        <word chars="rapist" language="EN" lastSearchDate="2018-03-01T23:33:14.489+04:00" searchCount="1" id="717b29fb-74e3-40be-bd45-03889b1c8e7b">
+            <translationIds>
+                <id>87fa58ea-1eb3-4fe3-901c-0567a467ecad</id>
+            </translationIds>
+        </word>
+        <word chars="захватить" language="RU" searchCount="0" id="6d5c37d8-7aa8-4777-8007-bf096a970182">
+            <translationIds>
+                <id>1a00fc28-67d5-4bb9-9c00-22c498025886</id>
+            </translationIds>
+        </word>
+        <word chars="reach" language="EN" lastSearchDate="2018-03-01T22:53:22.802+04:00" searchCount="1" id="98f12c32-5955-4d0f-8c5e-1ab7b59d3f89">
+            <translationIds>
+                <id>18c181c3-fdee-4bdb-996e-c8d5b34bd6fa</id>
+            </translationIds>
+        </word>
+        <word chars="нанести краткий визит" language="RU" searchCount="0" id="1a0f91b9-1cd5-4e0b-a05d-c86b9d1454f7">
+            <translationIds>
+                <id>20114330-fd0f-471b-a9c8-57446b8c604e</id>
+            </translationIds>
+        </word>
+        <word chars="effort" language="EN" lastSearchDate="2018-03-01T23:00:57.795+04:00" searchCount="1" id="7782d398-80c5-4d3e-bd98-f4dda86f7211">
+            <translationIds>
+                <id>7a70ed22-26fa-4f01-90e6-f96d034cbef0</id>
+            </translationIds>
+        </word>
+        <word chars="заглянуть" language="RU" searchCount="0" id="8995ec9d-0668-4a9e-8ae0-3d18ed29fda0">
+            <translationIds>
+                <id>20114330-fd0f-471b-a9c8-57446b8c604e</id>
+            </translationIds>
+        </word>
+        <word chars="заболеть" language="RU" searchCount="0" id="3465992b-8388-4da0-b35d-51d2815cde1c">
+            <translationIds>
+                <id>6a5ebcf5-ab3c-4e89-ae00-d0cbec203982</id>
+            </translationIds>
+        </word>
+        <word chars="вообще-то" language="RU" searchCount="0" id="29a42597-45f4-4eb7-83f0-dfc8b4b2168e">
+            <translationIds>
+                <id>710a44d5-de45-40b6-89bf-0f5d8d1d637c</id>
+            </translationIds>
+        </word>
+        <word chars="brunch" language="EN" lastSearchDate="2018-03-01T22:49:31.499+04:00" searchCount="1" id="c617e4e3-6adf-40f6-b2df-18de8850b407">
+            <translationIds>
+                <id>b665317d-3bf1-48c1-8f0a-e54238fc0127</id>
+            </translationIds>
+        </word>
+        <word chars="gaze" language="EN" lastSearchDate="2018-03-01T23:10:30.179+04:00" searchCount="1" id="448de07c-c7c3-4d88-8b04-9affca21627c">
+            <translationIds>
+                <id>193e60aa-6a52-4958-9ba5-3ed4253b0dbd</id>
             </translationIds>
         </word>
         <word chars="центр" language="RU" searchCount="0" id="c60b58aa-ee64-499e-a1cb-14bacce55fcf">
@@ -201,14 +248,99 @@
                 <id>1f03041d-5a97-40a5-a0fc-01af0d5cfffe</id>
             </translationIds>
         </word>
-        <word chars="spot" language="EN" lastSearchDate="2018-03-01T22:42:40.546+04:00" searchCount="1" id="03a3668f-a4f6-4826-8acf-3251e45f931a">
+        <word chars="грязный" language="RU" searchCount="0" id="1b7ed68b-c5e7-4ec9-9cde-e31ba2a94c2d">
             <translationIds>
-                <id>f4de232b-7f01-4f60-8ec1-00fd34b814af</id>
+                <id>6e55822d-9924-490d-bb69-43037a4b2591</id>
             </translationIds>
         </word>
-        <word chars="катастрофа" language="RU" searchCount="0" id="07745298-4fbd-4ebb-a4c6-635fe232ddbd">
+        <word chars="пуля" language="RU" searchCount="0" id="c7f67f81-6459-49c7-b227-ad76d8ea9eca">
             <translationIds>
-                <id>3ac45a87-385e-40f3-afb8-1221f843fdba</id>
+                <id>16b0d5da-6029-45f0-9714-6b66bf808324</id>
+            </translationIds>
+        </word>
+        <word chars="get sick" language="EN" lastSearchDate="2018-02-23T02:33:23.726+04:00" searchCount="1" id="6a5ebcf5-ab3c-4e89-ae00-d0cbec203982">
+            <translationIds>
+                <id>3465992b-8388-4da0-b35d-51d2815cde1c</id>
+            </translationIds>
+        </word>
+        <word chars="странно" language="RU" searchCount="0" id="138d7ea4-6a99-4ab3-b195-515f8384a157">
+            <translationIds>
+                <id>3b9349cf-0bf6-4724-beb0-203fd4421ea3</id>
+            </translationIds>
+        </word>
+        <word chars="bizarre" language="EN" lastSearchDate="2018-03-01T23:13:17.256+04:00" searchCount="1" id="3b9349cf-0bf6-4724-beb0-203fd4421ea3">
+            <translationIds>
+                <id>138d7ea4-6a99-4ab3-b195-515f8384a157</id>
+            </translationIds>
+        </word>
+        <word chars="автокафе" language="RU" searchCount="0" id="3f15efa8-ece0-43c6-a406-e7933596e472">
+            <translationIds>
+                <id>2b2b8d04-b5ba-46b5-ac16-8f0b6aec3d85</id>
+            </translationIds>
+        </word>
+        <word chars="barely" language="EN" lastSearchDate="2018-03-01T22:41:53.585+04:00" searchCount="1" id="796a9ece-b7b4-46fe-884b-4a157b8d38e8">
+            <translationIds>
+                <id>2b86dab1-a22e-4fb5-b342-46ca95a2c7ac</id>
+            </translationIds>
+        </word>
+        <word chars="косички" language="RU" searchCount="0" id="1e02acd0-802c-4459-94ef-ab81511d9e14">
+            <translationIds>
+                <id>89e9eeb0-f26c-497e-ac53-77c8a4008312</id>
+            </translationIds>
+        </word>
+        <word chars="адвокат" language="RU" searchCount="0" id="f2613035-21f7-4f0d-a311-8fa6149f190a">
+            <translationIds>
+                <id>750b8cab-97f9-42ad-8425-64c0a5d4d6a9</id>
+            </translationIds>
+        </word>
+        <word chars="terminal" language="EN" lastSearchDate="2018-03-01T23:29:48.493+04:00" searchCount="1" id="1e8d26d2-d39e-465b-8eee-f7a4dfef0853">
+            <translationIds>
+                <id>8c96a2dd-0dbc-4fd7-9807-4ec7147b8a1a</id>
+            </translationIds>
+        </word>
+        <word chars="неловко" language="RU" searchCount="0" id="910347b2-2750-4ef1-9b36-75dcea7f1099">
+            <translationIds>
+                <id>6dac64ea-c7fa-4fa9-ad60-4517f0e889eb</id>
+            </translationIds>
+        </word>
+        <word chars="card" language="EN" lastSearchDate="2018-03-01T22:48:43.620+04:00" searchCount="1" id="3abfb215-e7cd-4c5b-a757-b163a6341ee3">
+            <translationIds>
+                <id>00398248-fe94-4636-88a7-ff1cec9dc674</id>
+            </translationIds>
+        </word>
+        <word chars="еле" language="RU" searchCount="0" id="2b86dab1-a22e-4fb5-b342-46ca95a2c7ac">
+            <translationIds>
+                <id>796a9ece-b7b4-46fe-884b-4a157b8d38e8</id>
+            </translationIds>
+        </word>
+        <word chars="cornrows" language="EN" lastSearchDate="2018-03-01T22:52:24.800+04:00" searchCount="1" id="89e9eeb0-f26c-497e-ac53-77c8a4008312">
+            <translationIds>
+                <id>1e02acd0-802c-4459-94ef-ab81511d9e14</id>
+            </translationIds>
+        </word>
+        <word chars="capacity" language="EN" lastSearchDate="2018-03-01T22:54:00.229+04:00" searchCount="1" id="6c5b05c1-7920-4b93-b346-9e356a9e478e">
+            <translationIds>
+                <id>4a5b5841-c24e-41c6-a9b1-b2c618f9f4e7</id>
+            </translationIds>
+        </word>
+        <word chars=" tentpole" language="EN" lastSearchDate="2018-03-01T22:41:18.687+04:00" searchCount="1" id="9084e000-8973-4ad6-a965-4baefc02d232">
+            <translationIds>
+                <id>01666408-61ce-43d3-8aa2-fe1c3f77e372</id>
+            </translationIds>
+        </word>
+        <word chars="высокобюджетный фильм, доходы от которого предположительно компенсируют кинокомпании затраты на менее прибыльные фильмы" language="RU" searchCount="0" id="01666408-61ce-43d3-8aa2-fe1c3f77e372">
+            <translationIds>
+                <id>9084e000-8973-4ad6-a965-4baefc02d232</id>
+            </translationIds>
+        </word>
+        <word chars="совесть" language="RU" searchCount="0" id="dd42abe0-2ab6-4337-b1ce-b4560025545c">
+            <translationIds>
+                <id>b8e01fb7-1b05-4d8e-a10b-65507d1669b8</id>
+            </translationIds>
+        </word>
+        <word chars="способность" language="RU" searchCount="0" id="4a5b5841-c24e-41c6-a9b1-b2c618f9f4e7">
+            <translationIds>
+                <id>6c5b05c1-7920-4b93-b346-9e356a9e478e</id>
             </translationIds>
         </word>
         <word chars="добиться" language="RU" searchCount="0" id="33b11676-3e59-4ea0-b9ea-8bdb4965f9ea">
@@ -216,9 +348,105 @@
                 <id>4ba80d23-e644-49c4-b49b-7828f2d12047</id>
             </translationIds>
         </word>
-        <word chars="terminal" language="EN" lastSearchDate="2018-03-01T23:29:48.493+04:00" searchCount="1" id="1e8d26d2-d39e-465b-8eee-f7a4dfef0853">
+        <word chars="cardboard" language="EN" lastSearchDate="2018-02-23T02:26:58.362+04:00" searchCount="1" id="6c5120c3-9bd5-4ac4-b22f-33058a76656c">
             <translationIds>
-                <id>8c96a2dd-0dbc-4fd7-9807-4ec7147b8a1a</id>
+                <id>232bf7d1-fbd1-4f6d-a861-e35603bc07e8</id>
+            </translationIds>
+        </word>
+        <word chars="тест" language="RU" searchCount="0" id="aef7ef96-47f6-40a7-8dc7-b0ee6412506d">
+            <translationIds/>
+        </word>
+        <word chars="test" language="EN" lastSearchDate="2018-03-02T17:24:02.710+04:00" searchCount="1" id="4180fa70-e8e1-4396-9062-804779cd790e">
+            <translationIds/>
+        </word>
+        <word chars="отношение" language="RU" searchCount="0" id="17913242-ad0d-4114-bf66-bef484f17343">
+            <translationIds>
+                <id>a157b107-5046-4fb9-9221-63b147baa0bc</id>
+            </translationIds>
+        </word>
+        <word chars="поздний завтрак" language="RU" searchCount="0" id="b665317d-3bf1-48c1-8f0a-e54238fc0127">
+            <translationIds>
+                <id>c617e4e3-6adf-40f6-b2df-18de8850b407</id>
+            </translationIds>
+        </word>
+        <word chars="значимым" language="RU" searchCount="0" id="be71ffe4-1ea4-4f58-b676-458cc5e216b5">
+            <translationIds>
+                <id>0fd76da1-09ac-4ee6-b868-d321d8001695</id>
+            </translationIds>
+        </word>
+        <word chars="определенно" language="RU" searchCount="0" id="f1c8eaae-f6f7-4dbc-b135-46489a0ff9ed">
+            <translationIds>
+                <id>73e0e94f-e5a5-43f0-b7fc-76d4528f0bec</id>
+            </translationIds>
+        </word>
+        <word chars="перерыв" language="RU" searchCount="0" id="c63d8894-a655-4fef-b3a7-8a04c127edaa">
+            <translationIds>
+                <id>59790901-40a0-408d-8649-28dd616d3bd0</id>
+            </translationIds>
+        </word>
+        <word chars="spot" language="EN" lastSearchDate="2018-03-01T22:42:40.546+04:00" searchCount="1" id="03a3668f-a4f6-4826-8acf-3251e45f931a">
+            <translationIds>
+                <id>f4de232b-7f01-4f60-8ec1-00fd34b814af</id>
+            </translationIds>
+        </word>
+        <word chars="inspire" language="EN" lastSearchDate="2018-03-01T23:13:41.340+04:00" searchCount="1" id="70b4b889-d2af-4e07-9200-6909a6bf2c83">
+            <translationIds>
+                <id>99a849e8-d8c7-4e09-aa2d-1a662d07579d</id>
+            </translationIds>
+        </word>
+        <word chars="embarrassed" language="EN" lastSearchDate="2018-02-23T02:17:00.754+04:00" searchCount="1" id="6dac64ea-c7fa-4fa9-ad60-4517f0e889eb">
+            <translationIds>
+                <id>910347b2-2750-4ef1-9b36-75dcea7f1099</id>
+            </translationIds>
+        </word>
+        <word chars="science fiction " language="EN" lastSearchDate="2018-03-01T17:15:23.666+04:00" searchCount="1" id="636148c2-2661-49ea-86b8-6be3da1d3e5a">
+            <translationIds>
+                <id>d9f42211-d0e6-47ef-8555-75a7dda37835</id>
+            </translationIds>
+        </word>
+        <word chars="терминал" language="RU" searchCount="0" id="8c96a2dd-0dbc-4fd7-9807-4ec7147b8a1a">
+            <translationIds>
+                <id>1e8d26d2-d39e-465b-8eee-f7a4dfef0853</id>
+            </translationIds>
+        </word>
+        <word chars="achieve" language="EN" lastSearchDate="2018-03-01T22:46:22.721+04:00" searchCount="1" id="4ba80d23-e644-49c4-b49b-7828f2d12047">
+            <translationIds>
+                <id>33b11676-3e59-4ea0-b9ea-8bdb4965f9ea</id>
+            </translationIds>
+        </word>
+        <word chars="комбинезон" language="RU" searchCount="0" id="a0098f88-f778-4e8c-8f83-ae100334a94c">
+            <translationIds>
+                <id>bf6fb871-9a24-42b1-b6ee-4002914bd792</id>
+            </translationIds>
+        </word>
+        <word chars="bunch" language="EN" lastSearchDate="2018-03-01T22:57:35.727+04:00" searchCount="1" id="7b7a171a-d0e7-46dd-a4ab-ec04eaededc3">
+            <translationIds>
+                <id>70c587ea-63dc-486f-b4b0-762ccf458b3b</id>
+            </translationIds>
+        </word>
+        <word chars="насильник" language="RU" searchCount="0" id="87fa58ea-1eb3-4fe3-901c-0567a467ecad">
+            <translationIds>
+                <id>717b29fb-74e3-40be-bd45-03889b1c8e7b</id>
+            </translationIds>
+        </word>
+        <word chars="катастрофа" language="RU" searchCount="0" id="07745298-4fbd-4ebb-a4c6-635fe232ddbd">
+            <translationIds>
+                <id>3ac45a87-385e-40f3-afb8-1221f843fdba</id>
+            </translationIds>
+        </word>
+        <word chars="meaningful" language="EN" lastSearchDate="2018-03-01T22:45:37.420+04:00" searchCount="1" id="0fd76da1-09ac-4ee6-b868-d321d8001695">
+            <translationIds>
+                <id>be71ffe4-1ea4-4f58-b676-458cc5e216b5</id>
+            </translationIds>
+        </word>
+        <word chars="совет" language="RU" searchCount="0" id="04ee5d18-91ff-474e-9ef6-d50466843742">
+            <translationIds>
+                <id>1ca3fc32-142a-4dec-8cae-d8cc73c56f1b</id>
+            </translationIds>
+        </word>
+        <word chars="dizzy" language="EN" lastSearchDate="2018-03-01T23:15:48.018+04:00" searchCount="1" id="f4173ac3-b04a-47c3-a9e6-05c5c24d87be">
+            <translationIds>
+                <id>057b38b2-7753-4c0b-94a4-eb6d326c79d3</id>
             </translationIds>
         </word>
         <word chars="actually" language="EN" lastSearchDate="2018-03-01T17:57:46.787+04:00" searchCount="1" id="710a44d5-de45-40b6-89bf-0f5d8d1d637c">
@@ -227,257 +455,9 @@
                 <id>4ca75cb8-c9ff-4c83-9d4c-6754bdb6b201</id>
             </translationIds>
         </word>
-        <word chars="bizarre" language="EN" lastSearchDate="2018-03-01T23:13:17.256+04:00" searchCount="1" id="3b9349cf-0bf6-4724-beb0-203fd4421ea3">
+        <word chars="head" language="EN" lastSearchDate="2018-02-23T02:22:55.838+04:00" searchCount="1" id="9b7e1190-ae18-4f2b-aa35-7e703f0ece2f">
             <translationIds>
-                <id>138d7ea4-6a99-4ab3-b195-515f8384a157</id>
-            </translationIds>
-        </word>
-        <word chars="jumpsuit" language="EN" lastSearchDate="2018-03-01T22:51:46.773+04:00" searchCount="1" id="bf6fb871-9a24-42b1-b6ee-4002914bd792">
-            <translationIds>
-                <id>a0098f88-f778-4e8c-8f83-ae100334a94c</id>
-            </translationIds>
-        </word>
-        <word chars="совесть" language="RU" searchCount="0" id="dd42abe0-2ab6-4337-b1ce-b4560025545c">
-            <translationIds>
-                <id>b8e01fb7-1b05-4d8e-a10b-65507d1669b8</id>
-            </translationIds>
-        </word>
-        <word chars="грязный" language="RU" searchCount="0" id="1b7ed68b-c5e7-4ec9-9cde-e31ba2a94c2d">
-            <translationIds>
-                <id>6e55822d-9924-490d-bb69-43037a4b2591</id>
-            </translationIds>
-        </word>
-        <word chars="embarrassed" language="EN" lastSearchDate="2018-02-23T02:17:00.754+04:00" searchCount="1" id="6dac64ea-c7fa-4fa9-ad60-4517f0e889eb">
-            <translationIds>
-                <id>910347b2-2750-4ef1-9b36-75dcea7f1099</id>
-            </translationIds>
-        </word>
-        <word chars="неловко" language="RU" searchCount="0" id="910347b2-2750-4ef1-9b36-75dcea7f1099">
-            <translationIds>
-                <id>6dac64ea-c7fa-4fa9-ad60-4517f0e889eb</id>
-            </translationIds>
-        </word>
-        <word chars="терминал" language="RU" searchCount="0" id="8c96a2dd-0dbc-4fd7-9807-4ec7147b8a1a">
-            <translationIds>
-                <id>1e8d26d2-d39e-465b-8eee-f7a4dfef0853</id>
-            </translationIds>
-        </word>
-        <word chars="card" language="EN" lastSearchDate="2018-03-01T22:48:43.620+04:00" searchCount="1" id="3abfb215-e7cd-4c5b-a757-b163a6341ee3">
-            <translationIds>
-                <id>00398248-fe94-4636-88a7-ff1cec9dc674</id>
-            </translationIds>
-        </word>
-        <word chars="noon" language="EN" lastSearchDate="2018-02-23T02:13:01.288+04:00" searchCount="1" id="b99bfe95-0785-4b9b-b523-4f87b0ed8ad4">
-            <translationIds>
-                <id>6d7d1a72-81fd-4c36-bc15-2b8eb354973d</id>
-            </translationIds>
-        </word>
-        <word chars="treat" language="EN" lastSearchDate="2018-03-01T23:08:37.600+04:00" searchCount="1" id="12c3231a-e54f-4902-818c-933db5142077">
-            <translationIds>
-                <id>87e9bf4b-9881-4e68-92dd-1a470061e150</id>
-            </translationIds>
-        </word>
-        <word chars="заболеть" language="RU" searchCount="0" id="3465992b-8388-4da0-b35d-51d2815cde1c">
-            <translationIds>
-                <id>6a5ebcf5-ab3c-4e89-ae00-d0cbec203982</id>
-            </translationIds>
-        </word>
-        <word chars="обвиняемый" language="RU" searchCount="0" id="d200433c-85a6-44eb-a49e-746072d71371">
-            <translationIds>
-                <id>aa4f672c-9eb2-47f9-984c-a382697c7c04</id>
-            </translationIds>
-        </word>
-        <word chars="come over" language="EN" lastSearchDate="2018-02-23T02:15:12.267+04:00" searchCount="1" id="20114330-fd0f-471b-a9c8-57446b8c604e">
-            <translationIds>
-                <id>d247009f-864a-44b2-baf3-6fe21319e122</id>
-                <id>1a0f91b9-1cd5-4e0b-a05d-c86b9d1454f7</id>
-                <id>8995ec9d-0668-4a9e-8ae0-3d18ed29fda0</id>
-            </translationIds>
-        </word>
-        <word chars="wept" language="EN" lastSearchDate="2018-03-01T23:28:52.403+04:00" searchCount="1" id="5797b319-387a-4e55-9c7f-d8f0c6be1be7">
-            <translationIds>
-                <id>dceae46b-ee65-48d1-bf8a-8a766373bbc3</id>
-            </translationIds>
-        </word>
-        <word chars="значимым" language="RU" searchCount="0" id="be71ffe4-1ea4-4f58-b676-458cc5e216b5">
-            <translationIds>
-                <id>0fd76da1-09ac-4ee6-b868-d321d8001695</id>
-            </translationIds>
-        </word>
-        <word chars="advocate" language="EN" lastSearchDate="2018-03-01T17:11:48.939+04:00" searchCount="1" id="750b8cab-97f9-42ad-8425-64c0a5d4d6a9">
-            <translationIds>
-                <id>f2613035-21f7-4f0d-a311-8fa6149f190a</id>
-            </translationIds>
-        </word>
-        <word chars="перерыв" language="RU" searchCount="0" id="c63d8894-a655-4fef-b3a7-8a04c127edaa">
-            <translationIds>
-                <id>59790901-40a0-408d-8649-28dd616d3bd0</id>
-            </translationIds>
-        </word>
-        <word chars="достичь" language="RU" searchCount="0" id="18c181c3-fdee-4bdb-996e-c8d5b34bd6fa">
-            <translationIds>
-                <id>98f12c32-5955-4d0f-8c5e-1ab7b59d3f89</id>
-            </translationIds>
-        </word>
-        <word chars="поздний завтрак" language="RU" searchCount="0" id="b665317d-3bf1-48c1-8f0a-e54238fc0127">
-            <translationIds>
-                <id>c617e4e3-6adf-40f6-b2df-18de8850b407</id>
-            </translationIds>
-        </word>
-        <word chars="cornrows" language="EN" lastSearchDate="2018-03-01T22:52:24.800+04:00" searchCount="1" id="89e9eeb0-f26c-497e-ac53-77c8a4008312">
-            <translationIds>
-                <id>1e02acd0-802c-4459-94ef-ab81511d9e14</id>
-            </translationIds>
-        </word>
-        <word chars="cardboard" language="EN" lastSearchDate="2018-02-23T02:26:58.362+04:00" searchCount="1" id="6c5120c3-9bd5-4ac4-b22f-33058a76656c">
-            <translationIds>
-                <id>232bf7d1-fbd1-4f6d-a861-e35603bc07e8</id>
-            </translationIds>
-        </word>
-        <word chars="accused" language="EN" lastSearchDate="2018-03-01T23:32:57.360+04:00" searchCount="1" id="aa4f672c-9eb2-47f9-984c-a382697c7c04">
-            <translationIds>
-                <id>d200433c-85a6-44eb-a49e-746072d71371</id>
-            </translationIds>
-        </word>
-        <word chars="куча" language="RU" searchCount="0" id="70c587ea-63dc-486f-b4b0-762ccf458b3b">
-            <translationIds>
-                <id>7b7a171a-d0e7-46dd-a4ab-ec04eaededc3</id>
-            </translationIds>
-        </word>
-        <word chars="заглянуть" language="RU" searchCount="0" id="8995ec9d-0668-4a9e-8ae0-3d18ed29fda0">
-            <translationIds>
-                <id>20114330-fd0f-471b-a9c8-57446b8c604e</id>
-            </translationIds>
-        </word>
-        <word chars="reconcile" language="EN" lastSearchDate="2018-03-01T23:30:41.317+04:00" searchCount="1" id="c0485a58-1113-4e2d-9933-93d1721f042f">
-            <translationIds>
-                <id>423a6cbe-3d5a-4d19-874a-64a1e7527988</id>
-            </translationIds>
-        </word>
-        <word chars="каблуки" language="RU" searchCount="0" id="520b11c5-ba0b-4075-bddc-e221a0892dce">
-            <translationIds>
-                <id>901407fe-e032-4c85-b47f-e770444f5a66</id>
-            </translationIds>
-        </word>
-        <word chars=" tentpole" language="EN" lastSearchDate="2018-03-01T22:41:18.687+04:00" searchCount="1" id="9084e000-8973-4ad6-a965-4baefc02d232">
-            <translationIds>
-                <id>01666408-61ce-43d3-8aa2-fe1c3f77e372</id>
-            </translationIds>
-        </word>
-        <word chars="inspire" language="EN" lastSearchDate="2018-03-01T23:13:41.340+04:00" searchCount="1" id="70b4b889-d2af-4e07-9200-6909a6bf2c83">
-            <translationIds>
-                <id>99a849e8-d8c7-4e09-aa2d-1a662d07579d</id>
-            </translationIds>
-        </word>
-        <word chars="basicly" language="EN" lastSearchDate="2018-03-01T17:54:49.068+04:00" searchCount="1" id="b73f137f-f863-4124-8b3f-9d0a513750c0">
-            <translationIds>
-                <id>8a2016d4-751a-4338-8b79-993f522d30ea</id>
-            </translationIds>
-        </word>
-        <word chars="conscience" language="EN" lastSearchDate="2018-03-01T23:33:38.604+04:00" searchCount="1" id="b8e01fb7-1b05-4d8e-a10b-65507d1669b8">
-            <translationIds>
-                <id>dd42abe0-2ab6-4337-b1ce-b4560025545c</id>
-            </translationIds>
-        </word>
-        <word chars="пуля" language="RU" searchCount="0" id="c7f67f81-6459-49c7-b227-ad76d8ea9eca">
-            <translationIds>
-                <id>16b0d5da-6029-45f0-9714-6b66bf808324</id>
-            </translationIds>
-        </word>
-        <word chars="обходиться" language="RU" searchCount="0" id="87e9bf4b-9881-4e68-92dd-1a470061e150">
-            <translationIds>
-                <id>12c3231a-e54f-4902-818c-933db5142077</id>
-            </translationIds>
-        </word>
-        <word chars="gross" language="EN" lastSearchDate="2018-02-23T02:26:17.428+04:00" searchCount="1" id="6e55822d-9924-490d-bb69-43037a4b2591">
-            <translationIds>
-                <id>1b7ed68b-c5e7-4ec9-9cde-e31ba2a94c2d</id>
-            </translationIds>
-        </word>
-        <word chars="get sick" language="EN" lastSearchDate="2018-02-23T02:33:23.726+04:00" searchCount="1" id="6a5ebcf5-ab3c-4e89-ae00-d0cbec203982">
-            <translationIds>
-                <id>3465992b-8388-4da0-b35d-51d2815cde1c</id>
-            </translationIds>
-        </word>
-        <word chars="disaster" language="EN" lastSearchDate="2018-03-01T23:07:12.887+04:00" searchCount="2" id="3ac45a87-385e-40f3-afb8-1221f843fdba">
-            <translationIds>
-                <id>07745298-4fbd-4ebb-a4c6-635fe232ddbd</id>
-            </translationIds>
-        </word>
-        <word chars="отношение" language="RU" searchCount="0" id="17913242-ad0d-4114-bf66-bef484f17343">
-            <translationIds>
-                <id>a157b107-5046-4fb9-9221-63b147baa0bc</id>
-            </translationIds>
-        </word>
-        <word chars="научная фантастика " language="RU" searchCount="0" id="d9f42211-d0e6-47ef-8555-75a7dda37835">
-            <translationIds>
-                <id>636148c2-2661-49ea-86b8-6be3da1d3e5a</id>
-            </translationIds>
-        </word>
-        <word chars="heels" language="EN" lastSearchDate="2018-03-01T22:56:42.764+04:00" searchCount="1" id="901407fe-e032-4c85-b47f-e770444f5a66">
-            <translationIds>
-                <id>520b11c5-ba0b-4075-bddc-e221a0892dce</id>
-            </translationIds>
-        </word>
-        <word chars="косички" language="RU" searchCount="0" id="1e02acd0-802c-4459-94ef-ab81511d9e14">
-            <translationIds>
-                <id>89e9eeb0-f26c-497e-ac53-77c8a4008312</id>
-            </translationIds>
-        </word>
-        <word chars="meaningful" language="EN" lastSearchDate="2018-03-01T22:45:37.420+04:00" searchCount="1" id="0fd76da1-09ac-4ee6-b868-d321d8001695">
-            <translationIds>
-                <id>be71ffe4-1ea4-4f58-b676-458cc5e216b5</id>
-            </translationIds>
-        </word>
-        <word chars="dizzy" language="EN" lastSearchDate="2018-03-01T23:15:48.018+04:00" searchCount="1" id="f4173ac3-b04a-47c3-a9e6-05c5c24d87be">
-            <translationIds>
-                <id>057b38b2-7753-4c0b-94a4-eb6d326c79d3</id>
-            </translationIds>
-        </word>
-        <word chars="схватить" language="RU" searchCount="0" id="858f1c27-0f14-4d30-b1b9-0efde26baa4f">
-            <translationIds>
-                <id>1a00fc28-67d5-4bb9-9c00-22c498025886</id>
-            </translationIds>
-        </word>
-        <word chars="bunch" language="EN" lastSearchDate="2018-03-01T22:57:35.727+04:00" searchCount="1" id="7b7a171a-d0e7-46dd-a4ab-ec04eaededc3">
-            <translationIds>
-                <id>70c587ea-63dc-486f-b4b0-762ccf458b3b</id>
-            </translationIds>
-        </word>
-        <word chars="grab" language="EN" lastSearchDate="2018-02-23T02:20:16.293+04:00" searchCount="1" id="1a00fc28-67d5-4bb9-9c00-22c498025886">
-            <translationIds>
-                <id>6d5c37d8-7aa8-4777-8007-bf096a970182</id>
-                <id>858f1c27-0f14-4d30-b1b9-0efde26baa4f</id>
-            </translationIds>
-        </word>
-        <word chars="в основном" language="RU" searchCount="0" id="8a2016d4-751a-4338-8b79-993f522d30ea">
-            <translationIds>
-                <id>b73f137f-f863-4124-8b3f-9d0a513750c0</id>
-            </translationIds>
-        </word>
-        <word chars="нанести краткий визит" language="RU" searchCount="0" id="1a0f91b9-1cd5-4e0b-a05d-c86b9d1454f7">
-            <translationIds>
-                <id>20114330-fd0f-471b-a9c8-57446b8c604e</id>
-            </translationIds>
-        </word>
-        <word chars="адвокат" language="RU" searchCount="0" id="f2613035-21f7-4f0d-a311-8fa6149f190a">
-            <translationIds>
-                <id>750b8cab-97f9-42ad-8425-64c0a5d4d6a9</id>
-            </translationIds>
-        </word>
-        <word chars="место" language="RU" searchCount="0" id="f4de232b-7f01-4f60-8ec1-00fd34b814af">
-            <translationIds>
-                <id>03a3668f-a4f6-4826-8acf-3251e45f931a</id>
-            </translationIds>
-        </word>
-        <word chars="attitude" language="EN" lastSearchDate="2018-03-01T23:01:16.084+04:00" searchCount="1" id="a157b107-5046-4fb9-9221-63b147baa0bc">
-            <translationIds>
-                <id>17913242-ad0d-4114-bf66-bef484f17343</id>
-            </translationIds>
-        </word>
-        <word chars="автокафе" language="RU" searchCount="0" id="3f15efa8-ece0-43c6-a406-e7933596e472">
-            <translationIds>
-                <id>2b2b8d04-b5ba-46b5-ac16-8f0b6aec3d85</id>
+                <id>85a62e17-93a0-453b-9ae5-bffd70dbc41f</id>
             </translationIds>
         </word>
         <word chars="literally" language="EN" lastSearchDate="2018-02-22T20:50:12.227+04:00" searchCount="1" id="2a6f13da-bc66-49fa-997b-acd118bb0d09">
@@ -485,29 +465,49 @@
                 <id>c5bd8713-e882-4ffa-b65d-6590d9c977da</id>
             </translationIds>
         </word>
-        <word chars="картон" language="RU" searchCount="0" id="232bf7d1-fbd1-4f6d-a861-e35603bc07e8">
-            <translationIds>
-                <id>6c5120c3-9bd5-4ac4-b22f-33058a76656c</id>
-            </translationIds>
-        </word>
-        <word chars="направляться" language="RU" searchCount="0" id="85a62e17-93a0-453b-9ae5-bffd70dbc41f">
-            <translationIds>
-                <id>9b7e1190-ae18-4f2b-aa35-7e703f0ece2f</id>
-            </translationIds>
-        </word>
-        <word chars="reach" language="EN" lastSearchDate="2018-03-01T22:53:22.802+04:00" searchCount="1" id="98f12c32-5955-4d0f-8c5e-1ab7b59d3f89">
-            <translationIds>
-                <id>18c181c3-fdee-4bdb-996e-c8d5b34bd6fa</id>
-            </translationIds>
-        </word>
-        <word chars="высокобюджетный фильм, доходы от которого предположительно компенсируют кинокомпании затраты на менее прибыльные фильмы" language="RU" searchCount="0" id="01666408-61ce-43d3-8aa2-fe1c3f77e372">
-            <translationIds>
-                <id>9084e000-8973-4ad6-a965-4baefc02d232</id>
-            </translationIds>
-        </word>
         <word chars="буквально" language="RU" searchCount="0" id="c5bd8713-e882-4ffa-b65d-6590d9c977da">
             <translationIds>
                 <id>2a6f13da-bc66-49fa-997b-acd118bb0d09</id>
+            </translationIds>
+        </word>
+        <word chars="handle" language="EN" lastSearchDate="2018-02-23T02:35:51.638+04:00" searchCount="1" id="be1caaf7-8538-4cce-acda-348d4e01bfd3">
+            <translationIds>
+                <id>2ce85f6b-14f6-41cb-a588-a5ef6609f713</id>
+            </translationIds>
+        </word>
+        <word chars="disaster" language="EN" lastSearchDate="2018-03-01T23:07:12.887+04:00" searchCount="2" id="3ac45a87-385e-40f3-afb8-1221f843fdba">
+            <translationIds>
+                <id>07745298-4fbd-4ebb-a4c6-635fe232ddbd</id>
+            </translationIds>
+        </word>
+        <word chars="куча" language="RU" searchCount="0" id="70c587ea-63dc-486f-b4b0-762ccf458b3b">
+            <translationIds>
+                <id>7b7a171a-d0e7-46dd-a4ab-ec04eaededc3</id>
+            </translationIds>
+        </word>
+        <word chars="вдохновлять" language="RU" searchCount="0" id="99a849e8-d8c7-4e09-aa2d-1a662d07579d">
+            <translationIds>
+                <id>70b4b889-d2af-4e07-9200-6909a6bf2c83</id>
+            </translationIds>
+        </word>
+        <word chars="heels" language="EN" lastSearchDate="2018-03-01T22:56:42.764+04:00" searchCount="1" id="901407fe-e032-4c85-b47f-e770444f5a66">
+            <translationIds>
+                <id>520b11c5-ba0b-4075-bddc-e221a0892dce</id>
+            </translationIds>
+        </word>
+        <word chars="wept" language="EN" lastSearchDate="2018-03-01T23:28:52.403+04:00" searchCount="1" id="5797b319-387a-4e55-9c7f-d8f0c6be1be7">
+            <translationIds>
+                <id>dceae46b-ee65-48d1-bf8a-8a766373bbc3</id>
+            </translationIds>
+        </word>
+        <word chars="recess" language="EN" lastSearchDate="2018-02-23T02:27:25.594+04:00" searchCount="1" id="59790901-40a0-408d-8649-28dd616d3bd0">
+            <translationIds>
+                <id>c63d8894-a655-4fef-b3a7-8a04c127edaa</id>
+            </translationIds>
+        </word>
+        <word chars="духовка" language="RU" searchCount="0" id="5c3e2fbe-54c3-4050-ad76-25d6de3f55a8">
+            <translationIds>
+                <id>d01f01ad-7a95-4a31-8604-a2ec069aab15</id>
             </translationIds>
         </word>
     </words>
