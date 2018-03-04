@@ -10,12 +10,11 @@ import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
+import com.alenaco.mytranslator.main.ui.UIApp;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author kovalenko
@@ -38,8 +37,12 @@ public class SessionManager {
         return sessionContext;
     }
 
-    public CashManager getCashManager() {
-        return cashManager;
+    public Map<UUID, Word> getWords() {
+        Map<UUID, Word> words = new HashMap<>();
+        for (Word word : cashManager.getWords()) {
+            words.put(word.getId(), word.getCopyWord());
+        }
+        return words;
     }
 
     public Word translateWord(String chars) throws UnsupportedOperationException {
@@ -62,4 +65,15 @@ public class SessionManager {
     }
 
 
+    public void addCashChangedListener(CashManager.CashChangedListener listener) {
+        cashManager.addCashChangedListener(listener);
+    }
+
+    public void removeWordsWithTranslations(Word...words) {
+        List<Word> foundWords = new ArrayList<>();
+        for (Word word : words) {
+            foundWords.add(cashManager.findWordById(word.getId()));
+        }
+        cashManager.removeWordsWithTranslations(foundWords);
+    }
 }

@@ -92,6 +92,14 @@ public class CashListViewHBox extends HBox {
         return null;
     }
 
+    public void deleteWordButton(WordButton btn) {
+        leftPane.getChildren().remove(btn);
+    }
+
+    public boolean isListViewEmpty() {
+        return leftPane.getChildren().isEmpty();
+    }
+
     public boolean isEmpty() {
         return leftPane.getChildren().isEmpty();
     }
@@ -117,7 +125,7 @@ public class CashListViewHBox extends HBox {
                             showEditWordWindow(translation);
                             btn.setText(translation.getChars());
                         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                            sessionManager.getCashManager().removeWordsWithTranslations(translation);
+                            sessionManager.removeWordsWithTranslations(translation);
                             leftPane.getChildren().remove(btn);
                         }
                     });
@@ -143,7 +151,7 @@ public class CashListViewHBox extends HBox {
         ImageView deleteBtn = new ImageView(removeIcon);
         rightPane.getChildren().add(deleteBtn);
         deleteBtn.setOnMouseClicked(event -> {
-            sessionManager.getCashManager().removeWordsWithTranslations(wordBtn.getWord());
+            sessionManager.removeWordsWithTranslations(wordBtn.getWord());
         });
     }
 

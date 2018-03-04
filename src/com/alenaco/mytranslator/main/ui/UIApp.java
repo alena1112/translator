@@ -30,11 +30,14 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 //добавить логирование
 
 public class UIApp extends Application {
     private SessionManager sessionManager;
+    private Map<UUID, Word> words;
 
     private Stage primaryStage;
 
@@ -117,10 +120,11 @@ public class UIApp extends Application {
         cashView = new ListView<>();
         cashView.setPrefSize(width, height);
         previousWordsList = FXCollections.observableArrayList();
-        List<Word> words = sessionManager.getCashManager().getWords();
-        if (CollectionUtils.isNotEmpty(words)) {
-            words.sort((o1, o2) -> ObjectUtils.compare(o1.getLastSearchDate(), o2.getLastSearchDate()));//убрать
-            for (Word word : words) {
+        words = sessionManager.getWords();
+        List<Word> values = new ArrayList<>(words.values());
+        if (CollectionUtils.isNotEmpty(values)) {
+            values.sort((o1, o2) -> ObjectUtils.compare(o1.getLastSearchDate(), o2.getLastSearchDate()));
+            for (Word word : values) {
                 previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
             }
         }
@@ -163,7 +167,7 @@ public class UIApp extends Application {
     private void prepareTranslator() throws IllegalAccessException {
         try {
             sessionManager = new SessionManager();
-            sessionManager.getCashManager().addCashChangedListener(new UIAppCashChangedListener());
+            sessionManager.addCashChangedListener(new UIAppCashChangedListener());
         } catch (StorageException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
             showErrorDialog("Application Error!", e.getMessage());
@@ -224,7 +228,8 @@ public class UIApp extends Application {
     private class UIAppCashChangedListener implements CashManager.CashChangedListener {
 
         @Override
-        public void cashChanged(Word word, CashManager.CashChangingType changingType) {
+        public void cashChanged(UUID id, CashManager.CashChangingType changingType) {
+            Word word = words.get(id);
             switch (changingType) {
                 case ADD:
                     previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
@@ -263,9 +268,9 @@ public class UIApp extends Application {
         for (CashListViewHBox item : previousWordsList) {
             WordButton wB = item.getWordButton(word);
             if (wB != null) {
-                item.getChildren().remove(wB);
+                item.deleteWordButton(wB);
             }
-            if (item.isEmpty()) {
+            if (item.isListViewEmpty()) {
                 toDelete.add(item);
             }
         }

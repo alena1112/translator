@@ -15,7 +15,7 @@ import java.util.*;
  * @author kovalenko
  * @version $Id$
  */
-//
+
 public class CashManager {
     private Storage storage;
     private Cash cash;
@@ -37,12 +37,8 @@ public class CashManager {
         return modified;
     }
 
-    public List<Word> getWords() {
-        List<Word> words = new ArrayList<>();
-        for (Word word : cash.getWords()) {
-            words.add(new Word(word.getId(), word.getChars(), word.getLanguage(), word.getTranslations(), word.getSearchCount(), word.getLastSearchDate()));
-        }
-        return words;
+    public Set<Word> getWords() {
+        return cash.getWords();
     }
 
     protected void setModified(boolean modified, Word word, CashChangingType changingType) {
@@ -159,7 +155,7 @@ public class CashManager {
         return null;
     }
 
-    public void removeWordsWithTranslations(Word... selectedWords) {
+    public void removeWordsWithTranslations(List<Word> selectedWords) {
         for (Word word : selectedWords) {
             for (UUID id : word.getTranslations()) {
                 Word translation = findWordById(id);

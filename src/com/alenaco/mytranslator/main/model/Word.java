@@ -1,13 +1,13 @@
 package com.alenaco.mytranslator.main.model;
 
-import com.alenaco.mytranslator.main.controller.managers.CashManager;
-import org.apache.commons.lang.StringUtils;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author kovalenko
@@ -32,13 +32,8 @@ public class Word extends UUIDEntity {
         this.language = language;
     }
 
-    public Word(UUID id, String chars, Language language, Set<UUID> translations, int searchCount, Date lastSearchDate) {
+    public Word(UUID id) {
         super(id);
-        this.chars = chars;
-        this.language = language;
-        this.searchCount = searchCount;
-        this.lastSearchDate = lastSearchDate;
-        this.translations = new HashSet<>(translations);
     }
 
     @XmlAttribute
@@ -98,5 +93,15 @@ public class Word extends UUIDEntity {
     public void increaseSearchCount() {
         this.searchCount += 1;
         this.lastSearchDate = new Date();
+    }
+
+    public Word getCopyWord() {
+        Word copy = new Word(getId());
+        copy.chars = chars;
+        copy.language = language;
+        copy.searchCount = searchCount;
+        copy.lastSearchDate = lastSearchDate;
+        copy.translations = new HashSet<>(translations);
+        return copy;
     }
 }

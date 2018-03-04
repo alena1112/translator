@@ -13,6 +13,7 @@ public class WordButton extends Button {
 
     public WordButton(Word word, WordButtonType type) {
         super(word.getChars());
+        this.word = word;
         this.type = type;
         switch (type) {
             case WORD:
