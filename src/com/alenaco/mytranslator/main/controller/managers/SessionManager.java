@@ -24,6 +24,7 @@ public class SessionManager {
     private SessionContext sessionContext;
     private CashManager cashManager;
     private Translator translator;
+    private Map<UUID, Word> words;
 
     public SessionManager() throws StorageException, NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException {
@@ -38,9 +39,11 @@ public class SessionManager {
     }
 
     public Map<UUID, Word> getWords() {
-        Map<UUID, Word> words = new HashMap<>();
-        for (Word word : cashManager.getWords()) {
-            words.put(word.getId(), word.getCopyWord());
+        if (words == null) {
+            words = new HashMap<>();
+            for (Word word : cashManager.getWords()) {
+                words.put(word.getId(), word.getCopyWord());
+            }
         }
         return words;
     }
@@ -75,5 +78,24 @@ public class SessionManager {
             foundWords.add(cashManager.findWordById(word.getId()));
         }
         cashManager.removeWordsWithTranslations(foundWords);
+        updateWords();
+    }
+
+    public Word findWordById(UUID id) {
+        return words.get(id);
+    }
+
+    public String getCashStr() {
+        return cashManager.getCashStr();
+    }
+
+    public String getTranslationsStr(Word word) {
+        return cashManager.getTranslationsStr(cashManager.findWordById(word.getId()));
+    }
+
+    public void addNewTranslation(Word word) {
+        Word copy = word.getCopyWord();
+        cashManager.addNewTranslation(copy);
+        updateWords();
     }
 }

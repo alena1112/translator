@@ -64,7 +64,7 @@ public class CashListViewHBox extends HBox {
         createBaseWordButton(word);
 
         for (UUID id : word.getTranslations()) {
-            Word translation = sessionManager.getCashManager().findWordById(id);
+            Word translation = sessionManager.findWordById(id);
             if (translation != null) {
                 createTranslationTextButton(translation);
             }

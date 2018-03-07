@@ -228,8 +228,7 @@ public class UIApp extends Application {
     private class UIAppCashChangedListener implements CashManager.CashChangedListener {
 
         @Override
-        public void cashChanged(UUID id, CashManager.CashChangingType changingType) {
-            Word word = words.get(id);
+        public void cashChanged(Word word, CashManager.CashChangingType changingType) {
             switch (changingType) {
                 case ADD:
                     previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
