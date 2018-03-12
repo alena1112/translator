@@ -10,7 +10,6 @@ import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.SessionContext;
 import com.alenaco.mytranslator.main.model.Word;
-import com.alenaco.mytranslator.main.ui.UIApp;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,30 +21,23 @@ import java.util.*;
  */
 public class SessionManager {
     private SessionContext sessionContext;
-    private CashManager cashManager;
+    private CashManagerAPI cashManager;
     private Translator translator;
-    private Map<UUID, Word> words;
 
     public SessionManager() throws StorageException, NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException {
         //todo read session params from db or default settings
         sessionContext = new SessionContext(YandexTranslator.class, JSONStorage.class);
         translator = (Translator) SettingsHelper.getSettingsInstance(sessionContext.getTranslator());
-        cashManager = new CashManager(sessionContext.getStorage());
+        cashManager = new ClientCashManager(new ServiceCashManager(sessionContext.getStorage()));
     }
 
     public SessionContext getSessionContext() {
         return sessionContext;
     }
 
-    public Map<UUID, Word> getWords() {
-        if (words == null) {
-            words = new HashMap<>();
-            for (Word word : cashManager.getWords()) {
-                words.put(word.getId(), word.getCopyWord());
-            }
-        }
-        return words;
+    public CashManagerAPI getCashManager() {
+        return cashManager;
     }
 
     public Word translateWord(String chars) throws UnsupportedOperationException {
@@ -61,41 +53,5 @@ public class SessionManager {
             }
         }
         return null;
-    }
-
-    public void saveCash() throws StorageException {
-        cashManager.saveCash();
-    }
-
-
-    public void addCashChangedListener(CashManager.CashChangedListener listener) {
-        cashManager.addCashChangedListener(listener);
-    }
-
-    public void removeWordsWithTranslations(Word...words) {
-        List<Word> foundWords = new ArrayList<>();
-        for (Word word : words) {
-            foundWords.add(cashManager.findWordById(word.getId()));
-        }
-        cashManager.removeWordsWithTranslations(foundWords);
-        updateWords();
-    }
-
-    public Word findWordById(UUID id) {
-        return words.get(id);
-    }
-
-    public String getCashStr() {
-        return cashManager.getCashStr();
-    }
-
-    public String getTranslationsStr(Word word) {
-        return cashManager.getTranslationsStr(cashManager.findWordById(word.getId()));
-    }
-
-    public void addNewTranslation(Word word) {
-        Word copy = word.getCopyWord();
-        cashManager.addNewTranslation(copy);
-        updateWords();
     }
 }

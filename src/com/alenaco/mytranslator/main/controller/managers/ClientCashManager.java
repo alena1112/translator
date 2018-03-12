@@ -1,11 +1,8 @@
 package com.alenaco.mytranslator.main.controller.managers;
 
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
-import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
-import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 
@@ -13,39 +10,55 @@ import java.util.*;
  * @author kovalenko
  * @version $Id$
  */
-public class ClientCashManager extends CashManager {
-    private CashManager serviceCashManager;
+public class ClientCashManager implements CashManagerAPI {
+    private CashManagerAPI serviceCashManager;
+
+    public ClientCashManager(CashManagerAPI serviceCashManager) {
+        this.serviceCashManager = serviceCashManager;
+    }
 
     @Override
-    protected Word getTranslation(String chars) {
+    public Word getTranslation(String chars) {
         return serviceCashManager.getTranslation(chars);
     }
 
+    @Override
     public void saveCash() throws StorageException {
         serviceCashManager.saveCash();
     }
 
     @Override
     public void removeWordsWithTranslations(List<Word> selectedWords) {
-
-    }
-
-    public String getCashStr() {
-        return cashManager.getCashStr();
+        serviceCashManager.removeWordsWithTranslations(selectedWords);
     }
 
     @Override
-    protected Word createWord(String en, String ru, Language fromLang) {
-        return null;
+    public String getCashStr() {
+        return serviceCashManager.getCashStr();
     }
 
+    @Override
+    public Word createWord(String en, String ru, Language fromLang) {
+        return serviceCashManager.createWord(en, ru, fromLang);
+    }
+
+    @Override
     public String getTranslationsStr(Word word) {
-        return cashManager.getTranslationsStr(cashManager.findWordById(word.getId()));
+        return serviceCashManager.getTranslationsStr(word);
     }
 
+    @Override
     public void addNewTranslation(Word word) {
-        Word copy = word.getCopyWord();
-        cashManager.addNewTranslation(copy);
-        updateWords();
+        serviceCashManager.addNewTranslation(word);
+    }
+
+    @Override
+    public Set<Word> getWords() {
+        return serviceCashManager.getWords();
+    }
+
+    @Override
+    public void addCashChangedListener(CashChangedListener listener) {
+        serviceCashManager.addCashChangedListener(listener);
     }
 }

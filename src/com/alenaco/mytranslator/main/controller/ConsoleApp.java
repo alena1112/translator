@@ -33,10 +33,10 @@ public class ConsoleApp {
                 if (StringUtils.isNotBlank(clientInput)) {
 
                     if (clientInput.equals("@c")) {
-                        System.out.println(sessionManager.getCashStr());
+                        System.out.println(sessionManager.getCashManager().getCashStr());
                     } else {
                         Word word = sessionManager.translateWord(clientInput);
-                        System.out.println("Word: " + sessionManager.getTranslationsStr(word));
+                        System.out.println("Word: " + sessionManager.getCashManager().getTranslationsStr(word));
                     }
                 }
                 clientInput = in.nextLine();

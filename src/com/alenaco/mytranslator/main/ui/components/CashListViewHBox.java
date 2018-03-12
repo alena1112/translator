@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -64,7 +66,7 @@ public class CashListViewHBox extends HBox {
         createBaseWordButton(word);
 
         for (UUID id : word.getTranslations()) {
-            Word translation = sessionManager.findWordById(id);
+            Word translation = sessionManager.getCashManager().findWordById(id);
             if (translation != null) {
                 createTranslationTextButton(translation);
             }
@@ -125,7 +127,7 @@ public class CashListViewHBox extends HBox {
                             showEditWordWindow(translation);
                             btn.setText(translation.getChars());
                         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                            sessionManager.removeWordsWithTranslations(translation);
+                            sessionManager.getCashManager().removeWordsWithTranslations(Collections.singletonList(translation));
                             leftPane.getChildren().remove(btn);
                         }
                     });
@@ -151,7 +153,7 @@ public class CashListViewHBox extends HBox {
         ImageView deleteBtn = new ImageView(removeIcon);
         rightPane.getChildren().add(deleteBtn);
         deleteBtn.setOnMouseClicked(event -> {
-            sessionManager.removeWordsWithTranslations(wordBtn.getWord());
+            sessionManager.getCashManager().removeWordsWithTranslations(Collections.singletonList(wordBtn.getWord()));
         });
     }
 

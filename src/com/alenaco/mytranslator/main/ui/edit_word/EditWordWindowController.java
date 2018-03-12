@@ -45,7 +45,7 @@ public class EditWordWindowController {
         String text = translationTextField.getText();
         if (StringUtils.isNotBlank(text)) {
             word.setChars(text);
-            manager.addNewTranslation(word);
+            manager.getCashManager().addNewTranslation(word);
         }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();

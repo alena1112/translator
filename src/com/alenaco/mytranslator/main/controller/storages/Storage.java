@@ -1,9 +1,6 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
-import com.alenaco.mytranslator.main.controller.managers.CashManager;
 import com.alenaco.mytranslator.main.model.Cash;
-import com.alenaco.mytranslator.main.model.Language;
-import com.alenaco.mytranslator.main.model.Word;
 
 /**
  * @author kovalenko
