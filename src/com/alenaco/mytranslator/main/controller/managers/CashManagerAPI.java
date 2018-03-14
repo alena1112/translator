@@ -30,7 +30,9 @@ public interface CashManagerAPI {
 
     void addCashChangedListener(CashChangedListener listener);
 
-    Word findWordInCashById(UUID id);
+    void fireCashChangedListeners(Word word, CashChangingType changingType);
+
+    Word findWordById(UUID id);
 
     enum CashChangingType {
         ADD, CHANGE_CHARS, CHANGE_COUNT, ADD_TRANSLATION, DELETE

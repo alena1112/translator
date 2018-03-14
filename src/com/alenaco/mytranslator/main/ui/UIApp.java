@@ -223,7 +223,6 @@ public class UIApp extends Application {
     }
 
     private class UIAppCashChangedListener implements CashManagerAPI.CashChangedListener {
-
         @Override
         public void cashChanged(Word word, CashManagerAPI.CashChangingType changingType) {
             switch (changingType) {

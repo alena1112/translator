@@ -42,7 +42,7 @@ public class ServiceCashManager implements CashManagerAPI {
         if (word != null) {
             word.increaseSearchCount();
             setModified(true, word, CashChangingType.CHANGE_COUNT);
-            return word.getCopyWord();
+            return word;
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class ServiceCashManager implements CashManagerAPI {
             setModified(true, enWord, CashChangingType.ADD_TRANSLATION);
         }
 
-        return fromLang == Language.RU ? ruWord.getCopyWord() : enWord.getCopyWord();
+        return fromLang == Language.RU ? ruWord : enWord;
     }
 
     @Override
@@ -119,11 +119,7 @@ public class ServiceCashManager implements CashManagerAPI {
 
     @Override
     public Set<Word> getWords() {
-        Set<Word> copies = new HashSet<>();
-        for (Word word : cash.getWords()) {
-            copies.add(word.getCopyWord());
-        }
-        return copies;
+        return cash.getWords();
     }
 
     @Override
@@ -183,23 +179,15 @@ public class ServiceCashManager implements CashManagerAPI {
         }
     }
 
-    private void fireCashChangedListeners(Word word, CashChangingType changingType) {
-        Word reloadWord = word.getCopyWord();
+    @Override
+    public void fireCashChangedListeners(Word word, CashChangingType changingType) {
         for (CashChangedListener listener : listeners) {
-            listener.cashChanged(reloadWord, changingType);
+            listener.cashChanged(word, changingType);
         }
     }
 
     @Override
-    public Word findWordInCashById(UUID id) {
-        Word wordById = findWordById(id);
-        if (wordById != null) {
-            return wordById.getCopyWord();
-        }
-        return null;
-    }
-
-    private Word findWordById(UUID id) {
+    public Word findWordById(UUID id) {
         for (Word word : cash.getWords()) {
             if (word.getId().equals(id)) {
                 return word;
