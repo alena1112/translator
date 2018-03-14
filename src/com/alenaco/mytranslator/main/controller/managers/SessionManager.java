@@ -29,7 +29,7 @@ public class SessionManager {
         //todo read session params from db or default settings
         sessionContext = new SessionContext(YandexTranslator.class, JSONStorage.class);
         translator = (Translator) SettingsHelper.getSettingsInstance(sessionContext.getTranslator());
-        cashManager = new ClientCashManager(new ServiceCashManager(sessionContext.getStorage()));
+        cashManager = new ServiceCashManager(sessionContext.getStorage());
     }
 
     public SessionContext getSessionContext() {

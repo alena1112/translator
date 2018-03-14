@@ -6,6 +6,7 @@ import com.alenaco.mytranslator.main.model.Word;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created by alena on 07.03.18.
@@ -28,6 +29,8 @@ public interface CashManagerAPI {
     Set<Word> getWords();
 
     void addCashChangedListener(CashChangedListener listener);
+
+    Word findWordInCashById(UUID id);
 
     enum CashChangingType {
         ADD, CHANGE_CHARS, CHANGE_COUNT, ADD_TRANSLATION, DELETE

@@ -190,10 +190,19 @@ public class ServiceCashManager implements CashManagerAPI {
         }
     }
 
+    @Override
+    public Word findWordInCashById(UUID id) {
+        Word wordById = findWordById(id);
+        if (wordById != null) {
+            return wordById.getCopyWord();
+        }
+        return null;
+    }
+
     private Word findWordById(UUID id) {
         for (Word word : cash.getWords()) {
             if (word.getId().equals(id)) {
-                return word.getCopyWord();
+                return word;
             }
         }
         return null;
