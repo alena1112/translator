@@ -72,10 +72,10 @@ public class ServiceCashManager implements CashManagerAPI {
                 break;
         }
         if (ruWord.addTranslation(enWord)) {
-            setModified(true, ruWord, CashChangingType.ADD_TRANSLATION);
+            setModified(true, ruWord, enWord);
         }
         if (enWord.addTranslation(ruWord)) {
-            setModified(true, enWord, CashChangingType.ADD_TRANSLATION);
+            setModified(true, enWord, enWord);
         }
 
         return fromLang == Language.RU ? ruWord : enWord;
@@ -97,22 +97,14 @@ public class ServiceCashManager implements CashManagerAPI {
 
     @Override
     public void addNewTranslation(Word translationWord) {
-        Word word = findWord(translationWord.getChars());
-        if (word != null && word.getLanguage() == translationWord.getLanguage()) {
-            for (UUID id : translationWord.getTranslations()) {
-                word.getTranslations().add(id);
-                setModified(true, word, CashChangingType.ADD_TRANSLATION);
-                Word wordById = findWordById(id);
-                wordById.getTranslations().add(word.getId());
-                setModified(true, wordById, CashChangingType.ADD_TRANSLATION);
-            }
-        } else {
-            cash.getWords().add(translationWord);
-            setModified(true, translationWord, CashChangingType.ADD);
-            for (UUID id : translationWord.getTranslations()) {
-                Word wordById = findWordById(id);
-                wordById.getTranslations().add(translationWord.getId());
-                setModified(true, wordById, CashChangingType.ADD_TRANSLATION);
+        cash.getWords().add(translationWord);
+        setModified(true, translationWord, CashChangingType.ADD);
+        Set<UUID> baseWords = translationWord.getTranslations();
+        for (UUID baseWordId : baseWords) {
+            Word baseWord = findWordById(baseWordId);
+            if (baseWord != null) {
+                baseWord.addTranslation(translationWord);
+                setModified(true, baseWord, translationWord);
             }
         }
     }
@@ -179,10 +171,24 @@ public class ServiceCashManager implements CashManagerAPI {
         }
     }
 
+    private void setModified(boolean modified, Word word, Word translation) {
+        this.modified = modified;
+        if (modified) {
+            fireAddTranslationListeners(word, translation);
+        }
+    }
+
     @Override
     public void fireCashChangedListeners(Word word, CashChangingType changingType) {
         for (CashChangedListener listener : listeners) {
             listener.cashChanged(word, changingType);
+        }
+    }
+
+    @Override
+    public void fireAddTranslationListeners(Word word, Word translation) {
+        for (CashChangedListener listener : listeners) {
+            listener.addTranslation(word, translation);
         }
     }
 

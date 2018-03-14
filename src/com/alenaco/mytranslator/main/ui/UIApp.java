@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 //todo добавить логирование
 
@@ -237,12 +236,19 @@ public class UIApp extends Application {
                     break;
                 case CHANGE_COUNT:
                     break;
-                case ADD_TRANSLATION:
-
-                    break;
                 case DELETE:
                     deleteWordButtons(word);
                     break;
+            }
+        }
+
+        @Override
+        public void addTranslation(Word word, Word translation) {
+            for (CashListViewHBox item : previousWordsList) {
+                WordButton wB = item.getBaseWordBtn();
+                if (wB.getWord().equals(word)) {
+                    item.createTranslationTextButton(translation);
+                }
             }
         }
     }

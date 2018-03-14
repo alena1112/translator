@@ -82,6 +82,10 @@ public class CashListViewHBox extends HBox {
 
     }
 
+    public WordButton getBaseWordBtn() {
+        return wordBtn;
+    }
+
     public WordButton getWordButton(Word word) {
         for (Node node : leftPane.getChildren()) {
             if (node instanceof WordButton) {
@@ -118,7 +122,7 @@ public class CashListViewHBox extends HBox {
         leftPane.getChildren().add(wordBtn);
     }
 
-    private void createTranslationTextButton(Word translation) {
+    public void createTranslationTextButton(Word translation) {
         if (StringUtils.isNotBlank(translation.getChars())) {
             WordButton btn = new WordButton(translation, WordButton.WordButtonType.TRANSLATION);
             btn.addEventHandler(MouseEvent.MOUSE_CLICKED,

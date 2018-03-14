@@ -102,4 +102,11 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
             serviceManager.fireCashChangedListeners(word.getCopyWord(), changingType);
         }
     }
+
+    @Override
+    public void fireAddTranslationListeners(Word word, Word translation) {
+        if (word != null && translation != null) {
+            serviceManager.fireAddTranslationListeners(word.getCopyWord(), translation.getCopyWord());
+        }
+    }
 }

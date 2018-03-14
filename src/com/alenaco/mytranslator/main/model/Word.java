@@ -83,7 +83,7 @@ public class Word extends UUIDEntity {
     }
 
     public boolean addTranslation(Word translation) {
-        if (translation.getLanguage() != this.language && this.translations.contains(translation.getId())) {
+        if (translation.getLanguage() != this.language && !this.translations.contains(translation.getId())) {
             this.translations.add(translation.getId());
             return true;
         }

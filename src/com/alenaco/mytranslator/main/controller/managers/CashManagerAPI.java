@@ -32,13 +32,17 @@ public interface CashManagerAPI {
 
     void fireCashChangedListeners(Word word, CashChangingType changingType);
 
+    void fireAddTranslationListeners(Word word, Word translation);
+
     Word findWordById(UUID id);
 
     enum CashChangingType {
-        ADD, CHANGE_CHARS, CHANGE_COUNT, ADD_TRANSLATION, DELETE
+        ADD, CHANGE_CHARS, CHANGE_COUNT, DELETE
     }
 
     interface CashChangedListener {
         void cashChanged(Word word, CashChangingType changingType);
+
+        void addTranslation(Word word, Word translation);
     }
 }
