@@ -1,4 +1,4 @@
-package com.alenaco.mytranslator.main.controller.translator.yandex;
+package com.alenaco.mytranslator.main.controller.translator;
 
 /**
  * @author kovalenko

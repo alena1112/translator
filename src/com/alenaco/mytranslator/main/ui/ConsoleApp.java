@@ -2,13 +2,6 @@ package com.alenaco.mytranslator.main.ui;
 
 import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
-import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
-import com.alenaco.mytranslator.main.controller.translator.Translator;
-import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
-import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
-import com.alenaco.mytranslator.main.model.Cash;
-import com.alenaco.mytranslator.main.model.Language;
-import com.alenaco.mytranslator.main.model.Word;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,8 +28,8 @@ public class ConsoleApp {
                     if (clientInput.equals("@c")) {
                         System.out.println(sessionManager.getCashManager().getCashStr());
                     } else {
-                        Word word = sessionManager.translateWord(clientInput);
-                        System.out.println("Word: " + sessionManager.getCashManager().getTranslationsStr(word));
+                        String translations = sessionManager.translateWord(clientInput);
+                        System.out.println("Word: " + translations);
                     }
                 }
                 clientInput = in.nextLine();

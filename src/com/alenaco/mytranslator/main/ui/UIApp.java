@@ -178,8 +178,8 @@ public class UIApp extends Application {
     private void translateWord() {
         String clientInput = oneLangArea.getText();
         try {
-            Word word = sessionManager.translateWord(clientInput);
-            anotherLangArea.setText(word.getChars());
+            String translations = sessionManager.translateWord(clientInput);
+            anotherLangArea.setText(translations);
         } catch (UnsupportedOperationException exc) {
             showErrorDialog(null, String.format("%s is not supported!",
                     SettingsHelper.getClassName(sessionManager.getSessionContext().getTranslator())));
