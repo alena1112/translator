@@ -1,4 +1,4 @@
-package com.alenaco.mytranslator.main.controller.translator;
+package com.alenaco.mytranslator.main.controller;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

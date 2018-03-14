@@ -1,6 +1,6 @@
 package com.alenaco.mytranslator.main.controller.utils;
 
-import com.alenaco.mytranslator.main.controller.translator.Named;
+import com.alenaco.mytranslator.main.controller.Named;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.io.File;

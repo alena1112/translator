@@ -1,6 +1,6 @@
 package com.alenaco.mytranslator.main.controller.translator.yandex;
 
-import com.alenaco.mytranslator.main.controller.translator.Named;
+import com.alenaco.mytranslator.main.controller.Named;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.utils.HttpResult;

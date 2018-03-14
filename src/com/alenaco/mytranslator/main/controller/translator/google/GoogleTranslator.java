@@ -1,6 +1,6 @@
 package com.alenaco.mytranslator.main.controller.translator.google;
 
-import com.alenaco.mytranslator.main.controller.translator.Named;
+import com.alenaco.mytranslator.main.controller.Named;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.model.Language;

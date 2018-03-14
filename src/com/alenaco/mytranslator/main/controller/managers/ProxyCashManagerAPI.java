@@ -12,6 +12,7 @@ import java.util.*;
  * @author kovalenko
  * @version $Id$
  */
+//temporary class in order to check cash for server-client application
 public class ProxyCashManagerAPI implements CashManagerAPI {
     private CashManagerAPI serviceManager;
 

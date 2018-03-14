@@ -16,7 +16,6 @@ import java.util.*;
  * @version $Id$
  */
 
-//copy word only for experiment
 public class ServiceCashManager implements CashManagerAPI {
     private Cash cash;
     private Storage storage;

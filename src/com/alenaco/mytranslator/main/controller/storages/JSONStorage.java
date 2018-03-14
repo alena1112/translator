@@ -1,6 +1,6 @@
 package com.alenaco.mytranslator.main.controller.storages;
 
-import com.alenaco.mytranslator.main.controller.translator.Named;
+import com.alenaco.mytranslator.main.controller.Named;
 import com.alenaco.mytranslator.main.model.Cash;
 
 import javax.xml.bind.JAXBContext;

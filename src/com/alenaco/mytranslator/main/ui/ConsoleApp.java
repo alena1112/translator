@@ -1,4 +1,4 @@
-package com.alenaco.mytranslator.main.controller;
+package com.alenaco.mytranslator.main.ui;
 
 import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
