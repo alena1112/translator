@@ -6,6 +6,7 @@ import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Cash;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.InvocationTargetException;
@@ -74,7 +75,7 @@ public class ServiceCashManager implements CashManagerAPI {
             setModified(true, ruWord, enWord);
         }
         if (enWord.addTranslation(ruWord)) {
-            setModified(true, enWord, enWord);
+            setModified(true, enWord, ruWord);
         }
 
         return fromLang == Language.RU ? ruWord : enWord;
@@ -114,18 +115,21 @@ public class ServiceCashManager implements CashManagerAPI {
     }
 
     @Override
-    public void removeWordsWithTranslations(List<Word> selectedWords) {
+    public void removeWords(List<Word> selectedWords) {
         for (Word word : selectedWords) {
             Word reloadWord = findWordById(word.getId());
-            for (UUID id : reloadWord.getTranslations()) {
-                Word translation = findWordById(id);
-                if (translation != null) {
-                    cash.getWords().remove(translation);
-                    setModified(true, translation, CashChangingType.DELETE);
-                }
-            }
             cash.getWords().remove(reloadWord);
             setModified(true, reloadWord, CashChangingType.DELETE);
+            for (Word wordFromCash : cash.getWords()) {
+                if (CollectionUtils.isNotEmpty(wordFromCash.getTranslations())) {
+                    List<UUID> translations = new ArrayList<>(wordFromCash.getTranslations());
+                    for (UUID id : translations) {
+                        if (id.equals(word.getId())) {
+                            wordFromCash.getTranslations().remove(id);
+                        }
+                    }
+                }
+            }
         }
     }
 

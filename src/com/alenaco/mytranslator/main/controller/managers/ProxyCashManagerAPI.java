@@ -36,12 +36,12 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
     }
 
     @Override
-    public void removeWordsWithTranslations(List<Word> selectedWords) {
+    public void removeWords(List<Word> selectedWords) {
         List<Word> words = new ArrayList<>(selectedWords.size());
         for (Word word : selectedWords) {
             words.add(word.getCopyWord());
         }
-        serviceManager.removeWordsWithTranslations(words);
+        serviceManager.removeWords(words);
     }
 
     @Override

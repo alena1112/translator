@@ -5,12 +5,10 @@ import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
 import com.alenaco.mytranslator.main.ui.UIApp;
 import com.alenaco.mytranslator.main.ui.edit_word.EditWordWindowController;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -23,8 +21,9 @@ import javafx.stage.Stage;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -131,7 +130,7 @@ public class CashListViewHBox extends HBox {
                             showEditWordWindow(translation);
                             btn.setText(translation.getChars());
                         } else if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                            sessionManager.getCashManager().removeWordsWithTranslations(Collections.singletonList(translation));
+                            sessionManager.getCashManager().removeWords(Collections.singletonList(translation));
                             leftPane.getChildren().remove(btn);
                         }
                     });
@@ -157,7 +156,14 @@ public class CashListViewHBox extends HBox {
         ImageView deleteBtn = new ImageView(removeIcon);
         rightPane.getChildren().add(deleteBtn);
         deleteBtn.setOnMouseClicked(event -> {
-            sessionManager.getCashManager().removeWordsWithTranslations(Collections.singletonList(wordBtn.getWord()));
+            List<Word> toDelete = new ArrayList<>();
+            for (Node node : leftPane.getChildren()) {
+                if (node instanceof WordButton) {
+                    WordButton btn = (WordButton) node;
+                    toDelete.add(btn.getWord());
+                }
+            }
+            sessionManager.getCashManager().removeWords(toDelete);
         });
     }
 

@@ -16,7 +16,7 @@ public interface CashManagerAPI {
 
     void saveCash() throws StorageException;
 
-    void removeWordsWithTranslations(List<Word> selectedWords);
+    void removeWords(List<Word> selectedWords);
 
     String getCashStr();
 
