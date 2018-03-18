@@ -26,14 +26,24 @@ public class ServiceCashManager implements CashManagerAPI {
     public ServiceCashManager(Class storageClass) throws StorageException, InvocationTargetException,
             NoSuchMethodException, InstantiationException, IllegalAccessException {
         super();
-        this.storage = (Storage) SettingsHelper.getSettingsInstance(storageClass);
-        this.cash = storage.restoreCash();
+        restoreCash(storageClass);
     }
 
     @Override
     public void saveCash() throws StorageException {
-        storage.saveCash(cash);
-        modified = false;
+        if (modified) {
+            storage.saveCash(cash);
+            modified = false;
+        }
+    }
+
+    @Override
+    public void restoreCash(Class storageClass) throws StorageException, InvocationTargetException,
+            NoSuchMethodException, InstantiationException, IllegalAccessException {
+        if (storage == null || !storage.getClass().equals(storageClass)) {
+            storage = (Storage) SettingsHelper.getSettingsInstance(storageClass);
+            cash = storage.restoreCash();
+        }
     }
 
     @Override

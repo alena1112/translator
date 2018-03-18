@@ -13,7 +13,7 @@ import java.io.File;
  * @author kovalenko
  * @version $Id$
  */
-@Named(name = "JSON Storage")
+@Named("JSON Storage")
 public class JSONStorage implements Storage {
     private JAXBContext jaxbContext;
 

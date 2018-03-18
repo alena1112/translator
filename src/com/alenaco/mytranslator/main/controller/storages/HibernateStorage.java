@@ -6,7 +6,7 @@ import com.alenaco.mytranslator.main.model.Cash;
 /**
  * Created by alena on 28.02.18.
  */
-@Named(name = "Hibernate Storage")
+@Named("Hibernate Storage")
 public class HibernateStorage implements Storage {
 
     @Override

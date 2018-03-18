@@ -4,6 +4,7 @@ import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -12,6 +13,9 @@ import java.util.UUID;
  * Created by alena on 07.03.18.
  */
 public interface CashManagerAPI {
+
+    void restoreCash(Class storageClass) throws StorageException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
     Word getTranslation(String chars);
 
     void saveCash() throws StorageException;

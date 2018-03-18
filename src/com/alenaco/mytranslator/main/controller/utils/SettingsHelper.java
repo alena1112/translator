@@ -33,7 +33,7 @@ public class SettingsHelper {
         for (Class clazz : classes) {
             Named annotation = (Named) clazz.getAnnotation(Named.class);
             if (annotation != null) {
-                map.put(clazz, annotation.name());
+                map.put(clazz, annotation.value());
             } else {
                 map.put(clazz, clazz.getTypeName());
             }
@@ -73,7 +73,7 @@ public class SettingsHelper {
     public static String getClassName(Class clazz) {
         Named annotation = (Named) clazz.getAnnotation(Named.class);
         if (annotation != null) {
-            return annotation.name();
+            return annotation.value();
         }
         return null;
     }

@@ -22,6 +22,12 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
     }
 
     @Override
+    public void restoreCash(Class storageClass) throws StorageException, InvocationTargetException,
+            NoSuchMethodException, InstantiationException, IllegalAccessException {
+        serviceManager.restoreCash(storageClass);
+    }
+
+    @Override
     public Word getTranslation(String chars) {
         Word translation = serviceManager.getTranslation(chars);
         if (translation != null) {

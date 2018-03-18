@@ -2,6 +2,7 @@ package com.alenaco.mytranslator.main.ui.settings_window;
 
 import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
+import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 public class SettingsWindowController {
@@ -38,7 +40,7 @@ public class SettingsWindowController {
             items.addAll(translators.values());
 
             for (Class clazz : translators.keySet()) {
-                if (sessionManager.getSessionContext().getTranslator().getClass().equals(clazz)) {
+                if (sessionManager.getSessionContext().getTranslator().equals(clazz)) {
                     translatorTypesComboBox.setValue(translators.get(clazz));
                     break;
                 }
@@ -49,7 +51,7 @@ public class SettingsWindowController {
             items.addAll(storages.values());
 
             for (Class clazz : storages.keySet()) {
-                if (sessionManager.getSessionContext().getStorage().getClass().equals(clazz)) {
+                if (sessionManager.getSessionContext().getStorage().equals(clazz)) {
                     storageTypesComboBox.setValue(storages.get(clazz));
                     break;
                 }
@@ -88,6 +90,12 @@ public class SettingsWindowController {
             if (storageClass != null) {
                 sessionManager.getSessionContext().setStorage(storageClass);
             }
+        }
+        try {
+            sessionManager.restartSessionManager();
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
+                IllegalAccessException | StorageException e) {
+            e.printStackTrace();
         }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
