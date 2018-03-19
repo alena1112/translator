@@ -41,6 +41,8 @@ public interface CashManagerAPI {
 
     Word findWordById(UUID id);
 
+    void importFileIntoCash() throws StorageException;
+
     enum CashChangingType {
         ADD, CHANGE_CHARS, CHANGE_COUNT, DELETE
     }

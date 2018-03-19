@@ -1,7 +1,6 @@
-package com.alenaco.mytranslator.main.controller.storages;
+package com.alenaco.mytranslator.main.controller.importing;
 
-import com.alenaco.mytranslator.main.controller.Named;
-import com.alenaco.mytranslator.main.model.Cash;
+import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
 import org.apache.commons.lang.StringUtils;
@@ -14,20 +13,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Named("Local XML Storage")
-public class LocalStorage implements Storage {
+public class ImportWordsFromFile {
     private static final String FILE_NAME = "dict.xml";
 
-    @Override
-    public void saveCash(Cash cash) throws StorageException {
-
-    }
-
-    @Override
-    public Cash restoreCash() throws StorageException {
-        Set<Word> allWords = new HashSet<>();
+    public List<Word> importWords() throws StorageException {
+        List<Word> allWords = new ArrayList<>();
         try {
             DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = documentBuilder.parse(System.getProperty("user.dir") + "/" + FILE_NAME);
@@ -71,9 +64,7 @@ public class LocalStorage implements Storage {
             throw new StorageException(e.getMessage());
         }
 
-        Cash cash = new Cash();
-        cash.setWords(allWords);
-        return null;
+        return allWords;
     }
 
     private String normalizeRuChars(String chars) {

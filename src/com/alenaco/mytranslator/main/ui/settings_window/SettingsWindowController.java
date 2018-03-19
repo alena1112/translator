@@ -5,6 +5,7 @@ import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
+import com.alenaco.mytranslator.main.ui.UIApp;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +59,7 @@ public class SettingsWindowController {
             }
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            UIApp.showErrorDialog("Application Error!", e.getMessage());
         }
 
     }
@@ -95,9 +96,18 @@ public class SettingsWindowController {
             sessionManager.restartSessionManager();
         } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
                 IllegalAccessException | StorageException e) {
-            e.printStackTrace();
+            UIApp.showErrorDialog("Application Error!", e.getMessage());
         }
         Stage stage = (Stage) submitButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    protected void handleImportButtonAction(ActionEvent event) {
+        try {
+            sessionManager.importFileIntoCash();
+        } catch (StorageException e) {
+            UIApp.showErrorDialog("Application Error!", e.getMessage());
+        }
     }
 }

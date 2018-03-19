@@ -1,5 +1,6 @@
 package com.alenaco.mytranslator.main.controller.managers;
 
+import com.alenaco.mytranslator.main.controller.importing.ImportWordsFromFile;
 import com.alenaco.mytranslator.main.controller.storages.JSONStorage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
@@ -61,5 +62,9 @@ public class SessionManager {
             }
         }
         return null;
+    }
+
+    public void importFileIntoCash() throws StorageException {
+        cashManager.importFileIntoCash();
     }
 }

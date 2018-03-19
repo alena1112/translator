@@ -1,5 +1,6 @@
 package com.alenaco.mytranslator.main.controller.managers;
 
+import com.alenaco.mytranslator.main.controller.importing.ImportWordsFromFile;
 import com.alenaco.mytranslator.main.controller.storages.Storage;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
@@ -213,5 +214,15 @@ public class ServiceCashManager implements CashManagerAPI {
             }
         }
         return null;
+    }
+
+    @Override
+    public void importFileIntoCash() throws StorageException {
+        ImportWordsFromFile importing = new ImportWordsFromFile();
+        List<Word> words = importing.importWords();
+        cash.getWords().addAll(words);
+        for (Word word : words) {
+            setModified(true, word, CashChangingType.ADD);
+        }
     }
 }

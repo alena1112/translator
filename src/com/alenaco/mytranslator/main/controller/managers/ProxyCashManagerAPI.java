@@ -104,6 +104,11 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
     }
 
     @Override
+    public void importFileIntoCash() throws StorageException {
+        serviceManager.importFileIntoCash();
+    }
+
+    @Override
     public void fireCashChangedListeners(Word word, CashChangingType changingType) {
         if (word != null) {
             serviceManager.fireCashChangedListeners(word.getCopyWord(), changingType);
