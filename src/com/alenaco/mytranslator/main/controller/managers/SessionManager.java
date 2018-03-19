@@ -32,6 +32,14 @@ public class SessionManager {
         cashManager = new ProxyCashManagerAPI(sessionContext.getStorage());
     }
 
+    public void restartSessionManager() throws InvocationTargetException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException, StorageException {
+        if (!translator.getClass().equals(sessionContext.getTranslator())) {
+            translator = (Translator) SettingsHelper.getSettingsInstance(sessionContext.getTranslator());
+        }
+        cashManager.restoreCash(sessionContext.getStorage());
+    }
+
     public SessionContext getSessionContext() {
         return sessionContext;
     }
