@@ -14,7 +14,8 @@ import java.util.UUID;
  */
 public interface CashManagerAPI {
 
-    void restoreCash(Class storageClass) throws StorageException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+    void restoreCash(Class storageClass) throws StorageException, InvocationTargetException, NoSuchMethodException,
+            InstantiationException, IllegalAccessException;
 
     Word getTranslation(String chars);
 
