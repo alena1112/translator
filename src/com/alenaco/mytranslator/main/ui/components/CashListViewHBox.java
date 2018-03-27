@@ -147,7 +147,6 @@ public class CashListViewHBox extends HBox {
             newWord.setLanguage(wordBtn.getWord().getLanguage() == Language.EN ? Language.RU : Language.EN);
             newWord.getTranslations().add(wordBtn.getWord().getId());
             showEditWordWindow(newWord);
-            createTranslationTextButton(newWord);
         });
     }
 
