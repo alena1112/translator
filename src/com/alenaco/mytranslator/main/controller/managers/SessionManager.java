@@ -6,6 +6,7 @@ import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.translator.Translator;
 import com.alenaco.mytranslator.main.controller.translator.TranslatorResult;
 import com.alenaco.mytranslator.main.controller.translator.google.GoogleTranslator;
+import com.alenaco.mytranslator.main.controller.translator.yandex.YandexTranslator;
 import com.alenaco.mytranslator.main.controller.utils.LanguageUtils;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Language;
@@ -28,7 +29,7 @@ public class SessionManager {
     public SessionManager() throws StorageException, NoSuchMethodException, InstantiationException,
             IllegalAccessException, InvocationTargetException {
         //todo read session params from db or default settings
-        sessionContext = new SessionContext(GoogleTranslator.class, JSONStorage.class);
+        sessionContext = new SessionContext(YandexTranslator.class, JSONStorage.class);
         translator = (Translator) SettingsHelper.getSettingsInstance(sessionContext.getTranslator());
         cashManager = new ProxyCashManagerAPI(sessionContext.getStorage());
     }
