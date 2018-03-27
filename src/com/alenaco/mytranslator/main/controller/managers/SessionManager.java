@@ -68,4 +68,8 @@ public class SessionManager {
     public void importFileIntoCash() throws StorageException {
         cashManager.importFileIntoCash();
     }
+
+    public boolean isWordExists(UUID id) {
+        return cashManager.findWordById(id) != null;
+    }
 }

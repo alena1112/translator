@@ -91,7 +91,7 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
 
     @Override
     public void addCashChangedListener(CashChangedListener listener) {
-        serviceManager.addCashChangedListener(listener);
+        serviceManager.addCashChangedListener(new ProxyCashChangedListener(listener));
     }
 
     @Override
@@ -109,6 +109,11 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
     }
 
     @Override
+    public void changeChars(Word word) {
+        serviceManager.changeChars(word.getCopyWord());
+    }
+
+    @Override
     public void fireCashChangedListeners(Word word, CashChangingType changingType) {
         if (word != null) {
             serviceManager.fireCashChangedListeners(word.getCopyWord(), changingType);
@@ -119,6 +124,23 @@ public class ProxyCashManagerAPI implements CashManagerAPI {
     public void fireAddTranslationListeners(Word word, Word translation) {
         if (word != null && translation != null) {
             serviceManager.fireAddTranslationListeners(word.getCopyWord(), translation.getCopyWord());
+        }
+    }
+
+    class ProxyCashChangedListener implements CashChangedListener {
+        private CashChangedListener listener;
+
+        public ProxyCashChangedListener(CashChangedListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public void cashChanged(Word word, CashChangingType changingType) {
+            listener.cashChanged(word.getCopyWord(), changingType);
+        }
+        @Override
+        public void addTranslation(Word word, Word translation) {
+            listener.addTranslation(word.getCopyWord(), translation.getCopyWord());
         }
     }
 }

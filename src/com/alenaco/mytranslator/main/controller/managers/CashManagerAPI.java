@@ -43,6 +43,8 @@ public interface CashManagerAPI {
 
     void importFileIntoCash() throws StorageException;
 
+    void changeChars(Word word);
+
     enum CashChangingType {
         ADD, CHANGE_CHARS, CHANGE_COUNT, DELETE
     }

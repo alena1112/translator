@@ -89,7 +89,7 @@ public class CashListViewHBox extends HBox {
         for (Node node : leftPane.getChildren()) {
             if (node instanceof WordButton) {
                 WordButton btn = (WordButton) node;
-                if (btn.getWord().equals(word)) {
+                if (btn.getWord().getId().equals(word.getId())) {
                     return btn;
                 }
             }

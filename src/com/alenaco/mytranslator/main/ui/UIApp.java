@@ -7,6 +7,7 @@ import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
 import com.alenaco.mytranslator.main.model.Word;
 import com.alenaco.mytranslator.main.ui.components.CashListViewHBox;
 import com.alenaco.mytranslator.main.ui.components.WordButton;
+import com.alenaco.mytranslator.main.ui.listeners.UIAppCashChangedListener;
 import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -163,7 +164,7 @@ public class UIApp extends Application {
     private void prepareTranslator() throws IllegalAccessException {
         try {
             sessionManager = new SessionManager();
-            sessionManager.getCashManager().addCashChangedListener(new UIAppCashChangedListener());
+            sessionManager.getCashManager().addCashChangedListener(new UIAppCashChangedListener(this, sessionManager));
         } catch (StorageException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
             showErrorDialog("Application Error!", e.getMessage());
@@ -221,60 +222,11 @@ public class UIApp extends Application {
         langHelpPane.getChildren().add(position, garbageBtn);
     }
 
-    private class UIAppCashChangedListener implements CashManagerAPI.CashChangedListener {
-        @Override
-        public void cashChanged(Word word, CashManagerAPI.CashChangingType changingType) {
-            switch (changingType) {
-                case ADD:
-                    previousWordsList.add(0, new CashListViewHBox(word, sessionManager, primaryStage));
-                    break;
-                case CHANGE_CHARS:
-                    List<WordButton> wordButtons = findWordButtons(word);
-                    for (WordButton wB : wordButtons) {
-                        wB.setText(word.getChars());
-                    }
-                    break;
-                case CHANGE_COUNT:
-                    break;
-                case DELETE:
-                    deleteWordButtons(word);
-                    break;
-            }
-        }
-
-        @Override
-        public void addTranslation(Word word, Word translation) {
-            for (CashListViewHBox item : previousWordsList) {
-                WordButton wB = item.getBaseWordBtn();
-                if (wB.getWord().equals(word)) {
-                    item.createTranslationTextButton(translation);
-                }
-            }
-        }
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
-    private List<WordButton> findWordButtons(Word word) {
-        List<WordButton> foundItems = new ArrayList<>();
-        for (CashListViewHBox item : previousWordsList) {
-            WordButton wB = item.getWordButton(word);
-            if (wB != null) {
-                foundItems.add(wB);
-            }
-        }
-        return foundItems;
-    }
-
-    private void deleteWordButtons(Word word) {
-        List<CashListViewHBox> toDelete = new ArrayList<>();
-        for (CashListViewHBox item : previousWordsList) {
-            WordButton wB = item.getWordButton(word);
-            if (wB != null) {
-                item.deleteWordButton(wB);
-            }
-            if (item.isListViewEmpty()) {
-                toDelete.add(item);
-            }
-        }
-        previousWordsList.removeAll(toDelete);
+    public ObservableList<CashListViewHBox> getPreviousWordsList() {
+        return previousWordsList;
     }
 }

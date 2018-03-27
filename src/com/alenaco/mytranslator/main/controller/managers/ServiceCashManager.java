@@ -52,7 +52,7 @@ public class ServiceCashManager implements CashManagerAPI {
         Word word = findWord(chars);
         if (word != null) {
             word.increaseSearchCount();
-            setModified(true, word, CashChangingType.CHANGE_COUNT);
+            setModified(word, CashChangingType.CHANGE_COUNT);
             return word;
         }
         return null;
@@ -65,28 +65,28 @@ public class ServiceCashManager implements CashManagerAPI {
         if (ruWord == null) {
             ruWord = new Word(ru, Language.RU);
             cash.getWords().add(ruWord);
-            setModified(true, ruWord, CashChangingType.ADD);
+            setModified(ruWord, CashChangingType.ADD);
         }
         if (enWord == null) {
             enWord = new Word(en, Language.EN);
             cash.getWords().add(enWord);
-            setModified(true, enWord, CashChangingType.ADD);
+            setModified(enWord, CashChangingType.ADD);
         }
         switch (fromLang) {
             case RU:
                 ruWord.increaseSearchCount();
-                setModified(true, ruWord, CashChangingType.CHANGE_COUNT);
+                setModified(ruWord, CashChangingType.CHANGE_COUNT);
                 break;
             case EN:
                 enWord.increaseSearchCount();
-                setModified(true, enWord, CashChangingType.CHANGE_COUNT);
+                setModified(enWord, CashChangingType.CHANGE_COUNT);
                 break;
         }
         if (ruWord.addTranslation(enWord)) {
-            setModified(true, ruWord, enWord);
+            setModified(ruWord, enWord);
         }
         if (enWord.addTranslation(ruWord)) {
-            setModified(true, enWord, ruWord);
+            setModified(enWord, ruWord);
         }
 
         return fromLang == Language.RU ? ruWord : enWord;
@@ -109,13 +109,13 @@ public class ServiceCashManager implements CashManagerAPI {
     @Override
     public void addNewTranslation(Word translationWord) {
         cash.getWords().add(translationWord);
-        setModified(true, translationWord, CashChangingType.ADD);
+        setModified(translationWord, CashChangingType.ADD);
         Set<UUID> baseWords = translationWord.getTranslations();
         for (UUID baseWordId : baseWords) {
             Word baseWord = findWordById(baseWordId);
             if (baseWord != null) {
                 baseWord.addTranslation(translationWord);
-                setModified(true, baseWord, translationWord);
+                setModified(baseWord, translationWord);
             }
         }
     }
@@ -130,7 +130,7 @@ public class ServiceCashManager implements CashManagerAPI {
         for (Word word : selectedWords) {
             Word reloadWord = findWordById(word.getId());
             cash.getWords().remove(reloadWord);
-            setModified(true, reloadWord, CashChangingType.DELETE);
+            setModified(reloadWord, CashChangingType.DELETE);
             for (Word wordFromCash : cash.getWords()) {
                 if (CollectionUtils.isNotEmpty(wordFromCash.getTranslations())) {
                     List<UUID> translations = new ArrayList<>(wordFromCash.getTranslations());
@@ -178,18 +178,14 @@ public class ServiceCashManager implements CashManagerAPI {
         return foundWord.orElse(null);
     }
 
-    private void setModified(boolean modified, Word word, CashChangingType changingType) {
-        this.modified = modified;
-        if (modified) {
-            fireCashChangedListeners(word, changingType);
-        }
+    private void setModified(Word word, CashChangingType changingType) {
+        this.modified = true;
+        fireCashChangedListeners(word, changingType);
     }
 
-    private void setModified(boolean modified, Word word, Word translation) {
-        this.modified = modified;
-        if (modified) {
-            fireAddTranslationListeners(word, translation);
-        }
+    private void setModified(Word word, Word translation) {
+        this.modified = true;
+        fireAddTranslationListeners(word, translation);
     }
 
     @Override
@@ -222,7 +218,16 @@ public class ServiceCashManager implements CashManagerAPI {
         List<Word> words = importing.importWords();
         cash.getWords().addAll(words);
         for (Word word : words) {
-            setModified(true, word, CashChangingType.ADD);
+            setModified(word, CashChangingType.ADD);
+        }
+    }
+
+    @Override
+    public void changeChars(Word word) {
+        Word reloadedWord = findWordById(word.getId());
+        if (reloadedWord != null && !StringUtils.equals(word.getChars(), reloadedWord.getChars())) {
+            reloadedWord.setChars(word.getChars());
+            setModified(reloadedWord, CashChangingType.CHANGE_CHARS);
         }
     }
 }
