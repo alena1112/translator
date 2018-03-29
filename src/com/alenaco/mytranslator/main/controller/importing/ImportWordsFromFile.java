@@ -85,8 +85,12 @@ public class ImportWordsFromFile {
                 List<String> result = new ArrayList<>();
                 for (String word : array) {
                     String cleanWord = word.trim();
-                    if (StringUtils.isNotBlank(cleanWord)) {
-                        result.add(cleanWord);
+                    int index = cleanWord.indexOf("[a-zA-Z]");
+                    if (index != -1) {
+                        cleanWord = cleanWord.substring(index);
+                        if (StringUtils.isNotBlank(cleanWord)) {
+                            result.add(cleanWord);
+                        }
                     }
                 }
                 return result;

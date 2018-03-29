@@ -27,7 +27,7 @@ public class UIAppCashChangedListener implements CashManagerAPI.CashChangedListe
     public void cashChanged(Word word, CashManagerAPI.CashChangingType changingType) {
         switch (changingType) {
             case ADD:
-                app.getPreviousWordsList().add(0, new CashListViewHBox(word, sessionManager, app.getPrimaryStage()));
+                app.addListInPreviousWordsList(new CashListViewHBox(word, sessionManager, app.getPrimaryStage()));
                 break;
             case CHANGE_CHARS:
                 List<WordButton> wordButtons = findWordButtons(word);
@@ -75,6 +75,6 @@ public class UIAppCashChangedListener implements CashManagerAPI.CashChangedListe
                 toDelete.add(item);
             }
         }
-        app.getPreviousWordsList().removeAll(toDelete);
+        app.removeListsFromPreviousWordsList(toDelete);
     }
 }

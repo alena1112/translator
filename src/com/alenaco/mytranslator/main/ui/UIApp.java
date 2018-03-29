@@ -1,17 +1,18 @@
 package com.alenaco.mytranslator.main.ui;
 
-import com.alenaco.mytranslator.main.controller.managers.CashManagerAPI;
 import com.alenaco.mytranslator.main.controller.managers.SessionManager;
 import com.alenaco.mytranslator.main.controller.storages.StorageException;
 import com.alenaco.mytranslator.main.controller.utils.SettingsHelper;
+import com.alenaco.mytranslator.main.model.Language;
 import com.alenaco.mytranslator.main.model.Word;
 import com.alenaco.mytranslator.main.ui.components.CashListViewHBox;
-import com.alenaco.mytranslator.main.ui.components.WordButton;
 import com.alenaco.mytranslator.main.ui.listeners.UIAppCashChangedListener;
 import com.alenaco.mytranslator.main.ui.settings_window.SettingsWindowController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
 import javafx.scene.Parent;
@@ -47,6 +48,10 @@ public class UIApp extends Application {
 
     private ListView<CashListViewHBox> cashView;
     private ObservableList<CashListViewHBox> previousWordsList;
+    private List<CashListViewHBox> filteredWordsList = new ArrayList<>();
+
+    private FilterEvent ruFilterEvent;
+    private FilterEvent enFilterEvent;
 
     public static final String ADD_ICON = "resources/icons/add.png";
     public static final String REMOVE_ICON = "resources/icons/remove.png";
@@ -54,6 +59,8 @@ public class UIApp extends Application {
     public static final String MAIN_ICON = "resources/icons/main.jpg";
     public static final String GARBAGE_ICON = "resources/icons/garbage.png";
     public static final String SAVE_ICON = "resources/icons/save.png";
+    public static final String UK_ICON = "resources/icons/uk.png";
+    public static final String RUSSIA_ICON = "resources/icons/russia.png";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -72,6 +79,8 @@ public class UIApp extends Application {
         FlowPane cashHelpPane = new FlowPane(Orientation.VERTICAL);
         cashHelpPane.setVgap(2);
         createSaveCashBtn(0, cashHelpPane);
+        ruFilterEvent = createCashFilterBtn(1, cashHelpPane, Language.RU, RUSSIA_ICON);
+        enFilterEvent = createCashFilterBtn(2, cashHelpPane, Language.EN, UK_ICON);
 
         VBox translationVBox = new VBox(menuBar, oneLangArea, translateBtn, anotherLangArea);
         HBox cashHBox = new HBox(langAreasHelpPane, translationVBox, cashHelpPane, cashView);
@@ -212,6 +221,15 @@ public class UIApp extends Application {
         cashHelpPane.getChildren().add(position, saveBtn);
     }
 
+    private FilterEvent createCashFilterBtn(int position, FlowPane cashHelpPane, Language language, String icon) {
+        Image img = new Image(getClass().getClassLoader().getResourceAsStream(icon));
+        Button btn = new Button("", new ImageView(img));
+        FilterEvent filterEvent = new FilterEvent(btn, language);
+        btn.setOnAction(filterEvent);
+        cashHelpPane.getChildren().add(position, btn);
+        return filterEvent;
+    }
+
     private void createCleanLanguageAreasBtn(int position, FlowPane langHelpPane) {
         Image garbageImg = new Image(getClass().getClassLoader().getResourceAsStream(GARBAGE_ICON));
         Button garbageBtn = new Button("", new ImageView(garbageImg));
@@ -226,7 +244,73 @@ public class UIApp extends Application {
         return primaryStage;
     }
 
-    public ObservableList<CashListViewHBox> getPreviousWordsList() {
-        return previousWordsList;
+    public List<CashListViewHBox> getPreviousWordsList() {
+        List<CashListViewHBox> list = new ArrayList<>();
+        list.addAll(previousWordsList);
+        list.addAll(filteredWordsList);
+        return list;
+    }
+
+    public void addListInPreviousWordsList(CashListViewHBox list) {
+        Word word = list.getBaseWordBtn().getWord();
+        if (word.getLanguage() == Language.EN) {
+            if (ruFilterEvent.isActive()) {
+                filteredWordsList.add(list);
+            } else {
+                previousWordsList.add(0, list);
+            }
+        } else if (word.getLanguage() == Language.RU) {
+            if (enFilterEvent.isActive()) {
+                filteredWordsList.add(list);
+            } else {
+                previousWordsList.add(0, list);
+            }
+        }
+    }
+
+    public void removeListsFromPreviousWordsList(List<CashListViewHBox> items) {
+        previousWordsList.removeAll(items);
+        filteredWordsList.removeAll(items);
+    }
+
+    private class FilterEvent implements EventHandler<ActionEvent> {
+        private boolean active = false;
+        private Button btn;
+        private Language language;
+
+        public FilterEvent(Button btn, Language language) {
+            this.btn = btn;
+            this.language = language;
+        }
+
+        @Override
+        public void handle(ActionEvent event) {
+            active = !active;
+            if (!filteredWordsList.isEmpty()) {
+                previousWordsList.addAll(filteredWordsList);
+                filteredWordsList.clear();
+                if (this.equals(ruFilterEvent) && enFilterEvent.isActive()) {
+                    enFilterEvent.setActive(false);
+                } else if (this.equals(enFilterEvent) && ruFilterEvent.isActive()) {
+                    ruFilterEvent.setActive(false);
+                }
+            }
+            if (active) {
+                for (CashListViewHBox list : previousWordsList) {
+                    if (list.getBaseWordBtn().getWord().getLanguage() != language) {
+                        filteredWordsList.add(list);
+                    }
+                }
+                previousWordsList.removeAll(filteredWordsList);
+            }
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
     }
 }
